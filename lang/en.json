@@ -52,7 +52,11 @@
   "SWIPE_SYM.EditToughness": "Edit Toughness",
   "SWIPE_SYM.EditCorruption": "Edit Corruption",
   "SWIPE_SYM.Apply": "Apply",
-  "SWIPE_SYM.Close": "Close",
   "SWIPE_SYM.Settings.HideHudName": "Hide Symbaroum HUD on Mobile",
-  "SWIPE_SYM.Settings.HideHudHint": "Automatically hides the Symbaroum HUD module on mobile devices to save screen space."
+  "SWIPE_SYM.Settings.HideHudHint": "Automatically hides the Symbaroum HUD module on mobile devices to save screen space.",
+  "SWIPE_SYM.Drawn": "Drawn",
+  "SWIPE_SYM.Sheathed": "Sheathed",
+  "SWIPE_SYM.Draw": "Draw",
+  "SWIPE_SYM.Sheathe": "Sheathe",
+  "SWIPE_SYM.ManageWeapons": "Draw / Sheathe"
 }

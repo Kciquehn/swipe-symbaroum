@@ -52,7 +52,11 @@
   "SWIPE_SYM.EditToughness": "Editar Vitalidade",
   "SWIPE_SYM.EditCorruption": "Editar Corrupção",
   "SWIPE_SYM.Apply": "Aplicar",
-  "SWIPE_SYM.Close": "Fechar",
   "SWIPE_SYM.Settings.HideHudName": "Ocultar Symbaroum HUD no Celular",
-  "SWIPE_SYM.Settings.HideHudHint": "Oculta automaticamente o módulo Symbaroum HUD em telas mobile para liberar espaço."
+  "SWIPE_SYM.Settings.HideHudHint": "Oculta automaticamente o módulo Symbaroum HUD em telas mobile para liberar espaço.",
+  "SWIPE_SYM.Drawn": "Sacada",
+  "SWIPE_SYM.Sheathed": "Guardada",
+  "SWIPE_SYM.Draw": "Sacar",
+  "SWIPE_SYM.Sheathe": "Guardar",
+  "SWIPE_SYM.ManageWeapons": "Sacar / Guardar"
 }

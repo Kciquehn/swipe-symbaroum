@@ -622,169 +622,380 @@
 }
 
 /* ==========================================================================
-   8. Item Lists (Weapons, Armor, Equipment, Powers, Abilities)
+   8. Item Cards & Lists (Weapons, Armor, Equipment, Powers, Abilities)
    ========================================================================== */
 
+.ssym-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px 0 8px 0;
+  border-bottom: 1px solid var(--ssym-border);
+  padding-bottom: 6px;
+}
+
+.ssym-section-header:first-child {
+  margin-top: 2px;
+}
+
+.ssym-section-header .ssym-section-title {
+  margin: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.ssym-btn-pill {
+  background: rgba(124, 77, 255, 0.15);
+  border: 1px solid rgba(124, 77, 255, 0.4);
+  color: #c4b5fd;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.15s ease;
+}
+
+.ssym-btn-pill:active {
+  transform: scale(0.95);
+  background: rgba(124, 77, 255, 0.3);
+}
+
+.ssym-card-list,
 .ssym-item-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   margin-bottom: 12px;
 }
 
+/* Base Item Card */
+.ssym-item-card,
 .ssym-item-row {
-  display: flex;
-  align-items: center;
   background: var(--ssym-bg-card);
-  border: 1px solid var(--ssym-border-light);
+  border: 1px solid var(--ssym-border);
+  border-left: 4px solid var(--ssym-border-light);
   border-radius: var(--ssym-radius-md);
-  padding: 8px 10px;
-  gap: 10px;
-  min-height: 48px;
-  transition: background-color 0.15s ease;
+  box-shadow: var(--ssym-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.ssym-item-card:hover,
 .ssym-item-row:hover {
-  background: var(--ssym-bg-card-hover);
+  border-color: var(--ssym-border-highlight);
+}
+
+/* Card States: Drawn vs Sheathed */
+.ssym-item-card.is-drawn,
+.ssym-item-row.ssym-item-active {
+  border-left-color: #4caf50;
+  background: linear-gradient(90deg, rgba(76, 175, 80, 0.08) 0%, var(--ssym-bg-card) 40%);
+}
+
+.ssym-item-card.is-sheathed {
+  border-left-color: #555577;
+  opacity: 0.85;
+}
+
+.ssym-item-card.is-armor {
+  border-left-color: #2196f3;
+}
+
+.ssym-item-card.is-active-armor {
+  border-left-color: #2196f3;
+  background: linear-gradient(90deg, rgba(33, 150, 243, 0.08) 0%, var(--ssym-bg-card) 40%);
+}
+
+.ssym-item-card.is-power {
+  border-left-color: #ab47bc;
+}
+
+.ssym-item-card.is-ability {
+  border-left-color: #26a69a;
+}
+
+.ssym-item-card.is-artifact {
+  border-left-color: #ffb300;
+  background: linear-gradient(90deg, rgba(255, 179, 0, 0.06) 0%, var(--ssym-bg-card) 40%);
+}
+
+/* Card Main Row (Icon + Info) */
+.ssym-item-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
 }
 
 .ssym-item-icon {
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--ssym-radius-sm);
   object-fit: cover;
   flex-shrink: 0;
   background: var(--ssym-bg-secondary);
   border: 1px solid var(--ssym-border);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
-.ssym-item-details {
+.ssym-item-content,
+.ssym-item-info {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 4px;
 }
 
-.ssym-item-header {
+.ssym-item-title-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .ssym-item-name {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 13.5px;
+  font-weight: 700;
   color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 0.2px;
 }
 
-.ssym-item-sub {
-  font-size: 11px;
-  color: var(--ssym-text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 1px;
-}
-
-.ssym-item-qty,
-.ssym-item-quantity {
-  font-size: 11px;
-  color: var(--ssym-text-dim);
-  font-weight: 600;
-  margin-left: 2px;
-}
-
-.ssym-item-actions {
-  display: flex;
-  gap: 5px;
+/* Badge Buttons (e.g. Sacada / Guardada) */
+.ssym-badge-btn {
+  display: inline-flex;
   align-items: center;
-  flex-shrink: 0;
-}
-
-.ssym-action-btn {
-  border: none;
-  border-radius: var(--ssym-radius-sm);
-  padding: 6px 10px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #ffffff;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   cursor: pointer;
   touch-action: manipulation;
-  min-height: 44px; /* Accessible minimum touch target */
-  min-width: 44px;
+  border: none;
+  flex-shrink: 0;
+  transition: transform 0.12s ease, filter 0.15s ease;
+}
+
+.ssym-badge-btn:active {
+  transform: scale(0.92);
+}
+
+.ssym-badge-btn.drawn {
+  background: rgba(76, 175, 80, 0.2);
+  color: #81c784;
+  border: 1px solid rgba(76, 175, 80, 0.5);
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+}
+
+.ssym-badge-btn.sheathed {
+  background: rgba(255, 255, 255, 0.08);
+  color: #aaa;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Tags Container */
+.ssym-item-tags,
+.ssym-item-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.ssym-tag,
+.ssym-item-tag {
+  font-size: 10.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--ssym-bg-secondary);
+  border: 1px solid var(--ssym-border);
+  color: var(--ssym-text-main);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.ssym-tag-attr {
+  background: rgba(33, 150, 243, 0.15);
+  border-color: rgba(33, 150, 243, 0.35);
+  color: #64b5f6;
+  font-weight: 700;
+}
+
+.ssym-tag-damage {
+  background: rgba(245, 124, 0, 0.15);
+  border-color: rgba(245, 124, 0, 0.35);
+  color: #ffb74d;
+  font-weight: 700;
+}
+
+.ssym-tag-protect {
+  background: rgba(33, 150, 243, 0.15);
+  border-color: rgba(33, 150, 243, 0.35);
+  color: #90caf9;
+  font-weight: 600;
+}
+
+.ssym-tag-impediment {
+  background: rgba(158, 158, 158, 0.15);
+  border-color: rgba(158, 158, 158, 0.3);
+  color: #ccc;
+}
+
+.ssym-tag-qualities,
+.ssym-item-qualities {
+  color: var(--ssym-text-muted);
+  font-style: italic;
+  font-size: 10px;
+}
+
+.ssym-tag-action {
+  background: rgba(124, 77, 255, 0.15);
+  border-color: rgba(124, 77, 255, 0.35);
+  color: #d1c4e9;
+}
+
+.ssym-tag-corruption {
+  background: rgba(156, 39, 176, 0.15);
+  border-color: rgba(156, 39, 176, 0.35);
+  color: #ce93d8;
+}
+
+.ssym-tag-artifact {
+  background: rgba(255, 179, 0, 0.15);
+  border-color: rgba(255, 179, 0, 0.4);
+  color: #ffe082;
+  font-weight: 600;
+}
+
+/* Card Action Footer */
+.ssym-item-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.22);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ssym-card-btn {
+  flex: 1;
+  min-height: 38px;
+  border-radius: var(--ssym-radius-sm);
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  transition: transform 0.1s ease, filter 0.15s ease, background-color 0.15s ease;
+  gap: 6px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.1s ease, filter 0.15s ease, box-shadow 0.15s ease;
   user-select: none;
 }
 
-.ssym-action-btn:active {
-  transform: scale(0.93);
-  filter: brightness(0.85);
+.ssym-card-btn:active {
+  transform: scale(0.95);
+  filter: brightness(0.9);
 }
 
-.ssym-action-btn.attack {
-  background: var(--ssym-attack);
+.ssym-btn-attack {
+  background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+  box-shadow: 0 2px 8px rgba(229, 57, 53, 0.3);
 }
 
-.ssym-action-btn.attack:hover {
-  background: var(--ssym-attack-hover);
+.ssym-btn-damage {
+  background: linear-gradient(135deg, #fb8c00 0%, #e65100 100%);
+  box-shadow: 0 2px 8px rgba(251, 140, 0, 0.3);
 }
 
-.ssym-action-btn.damage {
-  background: var(--ssym-damage);
+.ssym-btn-draw-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #e0e0e0;
 }
 
-.ssym-action-btn.damage:hover {
-  background: var(--ssym-damage-hover);
+.ssym-btn-draw-toggle.is-drawn {
+  background: rgba(76, 175, 80, 0.15);
+  border-color: rgba(76, 175, 80, 0.4);
+  color: #a5d6a7;
 }
 
-.ssym-action-btn.protect {
-  background: var(--ssym-protect);
+.ssym-btn-protect {
+  background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+  box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3);
 }
 
-.ssym-action-btn.protect:hover {
-  background: var(--ssym-protect-hover);
-}
-
-.ssym-action-btn.use {
-  background: var(--ssym-use);
-}
-
-.ssym-action-btn.use:hover {
-  background: var(--ssym-use-hover);
+.ssym-btn-cast {
+  background: linear-gradient(135deg, #8e24aa 0%, #6a1b9a 100%);
+  box-shadow: 0 2px 8px rgba(142, 36, 170, 0.3);
 }
 
 /* Rank Badges */
 .ssym-rank-badge {
-  font-size: 9px;
+  font-size: 9.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding: 2px 5px;
+  padding: 2px 6px;
   border-radius: 4px;
   color: #ffffff;
   flex-shrink: 0;
   line-height: 1.2;
 }
 
-.ssym-rank-badge.novice {
+.ssym-rank-badge.novice,
+.ssym-rank-novice {
   background: var(--ssym-rank-novice);
 }
 
-.ssym-rank-badge.adept {
+.ssym-rank-badge.adept,
+.ssym-rank-adept {
   background: var(--ssym-rank-adept);
 }
 
-.ssym-rank-badge.master {
+.ssym-rank-badge.master,
+.ssym-rank-master {
   background: var(--ssym-rank-master);
   color: #1a1a2e;
+}
+
+/* Artifact Powers */
+.ssym-artifact-powers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 4px;
+}
+
+.ssym-artifact-power-badge {
+  font-size: 11px;
+  color: #ffe082;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ssym-corruption-sub {
+  font-size: 9.5px;
+  background: rgba(156, 39, 176, 0.25);
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: #ea80fc;
 }
 
 /* ==========================================================================

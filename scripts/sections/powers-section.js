@@ -28,39 +28,49 @@ export class PowersSection {
 
     return `
       <!-- Mystical Powers -->
-      <div class="ssym-section-title">${i18n('SWIPE_SYM.MysticalPowers')}</div>
-      <div class="ssym-item-list">
+      <div class="ssym-section-header">
+        <div class="ssym-section-title">${i18n('SWIPE_SYM.MysticalPowers')}</div>
+      </div>
+      <div class="ssym-card-list">
         ${powers.length === 0 ? `<p class="ssym-empty">${i18n('SWIPE_SYM.NoPowers')}</p>` : ''}
         ${powers.map(p => this._renderPower(p)).join('')}
       </div>
 
       <!-- Abilities -->
-      <div class="ssym-section-title">${i18n('SWIPE_SYM.Abilities')}</div>
-      <div class="ssym-item-list">
+      <div class="ssym-section-header">
+        <div class="ssym-section-title">${i18n('SWIPE_SYM.Abilities')}</div>
+      </div>
+      <div class="ssym-card-list">
         ${abilities.length === 0 ? `<p class="ssym-empty">${i18n('SWIPE_SYM.NoAbilities')}</p>` : ''}
         ${abilities.map(a => this._renderAbility(a)).join('')}
       </div>
 
       <!-- Rituals -->
       ${rituals.length > 0 ? `
-        <div class="ssym-section-title">${i18n('SWIPE_SYM.Rituals')}</div>
-        <div class="ssym-item-list">
+        <div class="ssym-section-header">
+          <div class="ssym-section-title">${i18n('SWIPE_SYM.Rituals')}</div>
+        </div>
+        <div class="ssym-card-list">
           ${rituals.map(r => this._renderRitual(r)).join('')}
         </div>
       ` : ''}
 
       <!-- Boons -->
       ${boons.length > 0 ? `
-        <div class="ssym-section-title">${i18n('SWIPE_SYM.Boons')}</div>
-        <div class="ssym-item-list">
+        <div class="ssym-section-header">
+          <div class="ssym-section-title">${i18n('SWIPE_SYM.Boons')}</div>
+        </div>
+        <div class="ssym-card-list">
           ${boons.map(b => this._renderSimpleItem(b)).join('')}
         </div>
       ` : ''}
 
       <!-- Burdens -->
       ${burdens.length > 0 ? `
-        <div class="ssym-section-title">${i18n('SWIPE_SYM.Burdens')}</div>
-        <div class="ssym-item-list">
+        <div class="ssym-section-header">
+          <div class="ssym-section-title">${i18n('SWIPE_SYM.Burdens')}</div>
+        </div>
+        <div class="ssym-card-list">
           ${burdens.map(b => this._renderSimpleItem(b)).join('')}
         </div>
       ` : ''}
@@ -72,20 +82,27 @@ export class PowersSection {
     const rankLabel = i18n(`SWIPE_SYM.${rank.charAt(0).toUpperCase() + rank.slice(1)}`);
     const activeLevel = power.system[rank];
     const action = activeLevel?.action || '';
+    const corruption = power.system.corruption || '';
 
     return `
-      <div class="ssym-item-row" data-item-id="${power.id}">
-        <img class="ssym-item-icon" src="${power.img}" alt="${power.name}" />
-        <div class="ssym-item-info">
-          <div class="ssym-item-name">${power.name}</div>
-          <div class="ssym-item-details">
-            <span class="ssym-rank-badge ssym-rank-${rank}">${rankLabel}</span>
-            ${action ? `<span class="ssym-item-tag">${action}</span>` : ''}
+      <div class="ssym-item-card is-power" data-item-id="${power.id}">
+        <div class="ssym-item-main">
+          <img class="ssym-item-icon" src="${power.img}" alt="${power.name}" />
+          <div class="ssym-item-content">
+            <div class="ssym-item-title-row">
+              <span class="ssym-item-name">${power.name}</span>
+              <span class="ssym-rank-badge ssym-rank-${rank}">${rankLabel}</span>
+            </div>
+            <div class="ssym-item-tags">
+              ${action ? `<span class="ssym-tag ssym-tag-action">${action}</span>` : ''}
+              ${corruption ? `<span class="ssym-tag ssym-tag-corruption"><i class="fas fa-biohazard"></i> ${corruption}</span>` : ''}
+            </div>
           </div>
         </div>
-        <div class="ssym-item-actions">
-          <button type="button" class="ssym-btn ssym-btn-cast" data-action="use-power" data-item-id="${power.id}">
-            <i class="fas fa-magic"></i>
+        <div class="ssym-item-footer">
+          <button type="button" class="ssym-card-btn ssym-btn-cast" data-action="use-power" data-item-id="${power.id}">
+            <i class="fas fa-wand-magic-sparkles"></i>
+            <span>${i18n('SWIPE_SYM.Use')}</span>
           </button>
         </div>
       </div>
@@ -99,13 +116,19 @@ export class PowersSection {
     const action = activeLevel?.action || '';
 
     return `
-      <div class="ssym-item-row" data-item-id="${ability.id}">
-        <img class="ssym-item-icon" src="${ability.img}" alt="${ability.name}" />
-        <div class="ssym-item-info">
-          <div class="ssym-item-name">${ability.name}</div>
-          <div class="ssym-item-details">
-            <span class="ssym-rank-badge ssym-rank-${rank}">${rankLabel}</span>
-            ${action ? `<span class="ssym-item-tag">${action}</span>` : ''}
+      <div class="ssym-item-card is-ability" data-item-id="${ability.id}">
+        <div class="ssym-item-main">
+          <img class="ssym-item-icon" src="${ability.img}" alt="${ability.name}" />
+          <div class="ssym-item-content">
+            <div class="ssym-item-title-row">
+              <span class="ssym-item-name">${ability.name}</span>
+              <span class="ssym-rank-badge ssym-rank-${rank}">${rankLabel}</span>
+            </div>
+            ${action ? `
+              <div class="ssym-item-tags">
+                <span class="ssym-tag ssym-tag-action">${action}</span>
+              </div>
+            ` : ''}
           </div>
         </div>
       </div>
@@ -115,12 +138,14 @@ export class PowersSection {
   _renderRitual(ritual) {
     const tradition = ritual.system.tradition || '';
     return `
-      <div class="ssym-item-row" data-item-id="${ritual.id}">
-        <img class="ssym-item-icon" src="${ritual.img}" alt="${ritual.name}" />
-        <div class="ssym-item-info">
-          <div class="ssym-item-name">${ritual.name}</div>
-          <div class="ssym-item-details">
-            ${tradition ? `<span class="ssym-item-tag">${tradition}</span>` : ''}
+      <div class="ssym-item-card is-ritual" data-item-id="${ritual.id}">
+        <div class="ssym-item-main">
+          <img class="ssym-item-icon" src="${ritual.img}" alt="${ritual.name}" />
+          <div class="ssym-item-content">
+            <div class="ssym-item-title-row">
+              <span class="ssym-item-name">${ritual.name}</span>
+              ${tradition ? `<span class="ssym-tag ssym-tag-tradition">${tradition}</span>` : ''}
+            </div>
           </div>
         </div>
       </div>
@@ -129,10 +154,14 @@ export class PowersSection {
 
   _renderSimpleItem(item) {
     return `
-      <div class="ssym-item-row ssym-item-compact" data-item-id="${item.id}">
-        <img class="ssym-item-icon" src="${item.img}" alt="${item.name}" />
-        <div class="ssym-item-info">
-          <div class="ssym-item-name">${item.name}</div>
+      <div class="ssym-item-card is-simple" data-item-id="${item.id}">
+        <div class="ssym-item-main">
+          <img class="ssym-item-icon" src="${item.img}" alt="${item.name}" />
+          <div class="ssym-item-content">
+            <div class="ssym-item-title-row">
+              <span class="ssym-item-name">${item.name}</span>
+            </div>
+          </div>
         </div>
       </div>
     `;
@@ -156,23 +185,30 @@ export class PowersSection {
         btn.classList.add('ssym-pressed');
         setTimeout(() => btn.classList.remove('ssym-pressed'), 200);
 
-        // Open the item sheet to use the power (Symbaroum handles casting via sheets)
         if (item.sheet) item.sheet.render(true);
       });
     });
 
-    // Long press on any item to open its sheet
-    container.querySelectorAll('.ssym-item-row').forEach(row => {
+    // Card tap / long press to open item sheet
+    container.querySelectorAll('.ssym-item-card').forEach(card => {
       let pressTimer;
-      row.addEventListener('touchstart', () => {
+      card.addEventListener('touchstart', (e) => {
+        if (e.target.closest('button')) return;
         pressTimer = setTimeout(() => {
-          const itemId = row.dataset.itemId;
+          const itemId = card.dataset.itemId;
           const item = this.actor.items.get(itemId);
           if (item?.sheet) item.sheet.render(true);
         }, 500);
       }, { passive: true });
-      row.addEventListener('touchend', () => clearTimeout(pressTimer), { passive: true });
-      row.addEventListener('touchmove', () => clearTimeout(pressTimer), { passive: true });
+      card.addEventListener('touchend', () => clearTimeout(pressTimer), { passive: true });
+      card.addEventListener('touchmove', () => clearTimeout(pressTimer), { passive: true });
+
+      card.addEventListener('dblclick', (e) => {
+        if (e.target.closest('button')) return;
+        const itemId = card.dataset.itemId;
+        const item = this.actor.items.get(itemId);
+        if (item?.sheet) item.sheet.render(true);
+      });
     });
   }
 }
