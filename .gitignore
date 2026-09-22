@@ -1,0 +1,17 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node / package manager
+node_modules/
+dist/
+*.zip
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temporary logs
+*.log

@@ -1,0 +1,1340 @@
+/**
+ * Swipe Symbaroum - Mobile Character Sheet Styles
+ * Modern, minimalist, mobile-first touch UI for Symbaroum RPG on Foundry VTT.
+ */
+
+:root {
+  /* Color Palette */
+  --ssym-bg: #1a1a2e;
+  --ssym-bg-secondary: #222240;
+  --ssym-bg-card: #252547;
+  --ssym-bg-card-hover: #2f2f58;
+  --ssym-bg-elevated: #2d2d52;
+  --ssym-bg-input: #151526;
+  
+  /* Borders & Dividers */
+  --ssym-border: #2a2a4e;
+  --ssym-border-light: rgba(255, 255, 255, 0.08);
+  --ssym-border-highlight: rgba(124, 77, 255, 0.4);
+
+  /* Typography */
+  --ssym-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --ssym-text-main: #f0f0f5;
+  --ssym-text-muted: #8e8ea6;
+  --ssym-text-dim: #636380;
+
+  /* Theme Accents */
+  --ssym-accent: #7c4dff;
+  --ssym-accent-hover: #9670ff;
+
+  /* Health & Corruption */
+  --ssym-toughness-high: #4caf50;
+  --ssym-toughness-mid: #ff9800;
+  --ssym-toughness-low: #f44336;
+  --ssym-corruption: #9c27b0;
+  --ssym-corruption-dark: #6a1b9a;
+
+  /* Action Buttons */
+  --ssym-attack: #e53935;
+  --ssym-attack-hover: #ef5350;
+  --ssym-damage: #fb8c00;
+  --ssym-damage-hover: #ffa726;
+  --ssym-protect: #1e88e5;
+  --ssym-protect-hover: #42a5f5;
+  --ssym-use: #7c4dff;
+  --ssym-use-hover: #9670ff;
+
+  /* Rank Badges */
+  --ssym-rank-novice: #43a047;
+  --ssym-rank-adept: #1e88e5;
+  --ssym-rank-master: #fbc02d;
+
+  /* Sizing & Radius */
+  --ssym-radius-sm: 6px;
+  --ssym-radius-md: 10px;
+  --ssym-radius-lg: 16px;
+  --ssym-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.25);
+  --ssym-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --ssym-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.55);
+}
+
+/* ==========================================================================
+   1. Backdrop & Drawer Container
+   ========================================================================== */
+
+.ssym-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.ssym-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ssym-drawer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: var(--ssym-bg);
+  border-radius: var(--ssym-radius-lg) var(--ssym-radius-lg) 0 0;
+  border-top: 1px solid var(--ssym-border-light);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--ssym-text-main);
+  font-family: var(--ssym-font-family);
+  box-shadow: var(--ssym-shadow-lg);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+.ssym-drawer *,
+.ssym-drawer *::before,
+.ssym-drawer *::after {
+  box-sizing: border-box;
+}
+
+.ssym-drawer.open {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   2. Drag Handle
+   ========================================================================== */
+
+.ssym-handle {
+  padding: 10px;
+  text-align: center;
+  cursor: grab;
+  flex-shrink: 0;
+  touch-action: none;
+  min-height: 24px;
+}
+
+.ssym-handle:active {
+  cursor: grabbing;
+}
+
+.ssym-handle-bar {
+  width: 40px;
+  height: 4px;
+  background: #555577;
+  border-radius: 2px;
+  margin: 0 auto;
+  transition: background-color 0.2s ease;
+}
+
+.ssym-handle:hover .ssym-handle-bar {
+  background: #777799;
+}
+
+/* ==========================================================================
+   3. Header & Resource Bars
+   ========================================================================== */
+
+.ssym-header {
+  padding: 4px 16px 12px 16px;
+  border-bottom: 1px solid var(--ssym-border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ssym-header-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ssym-avatar-wrap,
+.ssym-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.ssym-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--ssym-border);
+  background-color: var(--ssym-bg-secondary);
+  display: block;
+}
+
+.ssym-info,
+.ssym-header-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ssym-name,
+.ssym-char-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.2px;
+}
+
+.ssym-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ssym-badges,
+.ssym-header-badges {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ssym-badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--ssym-bg-elevated);
+  color: var(--ssym-text-muted);
+}
+
+/* Resource Bar Groups (Tap Targets) */
+.ssym-bars,
+.ssym-header-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ssym-bar-group,
+.ssym-bar-target {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  cursor: pointer;
+  touch-action: manipulation;
+  padding: 4px 6px;
+  margin: 0 -6px;
+  border-radius: var(--ssym-radius-sm);
+  transition: background-color 0.15s ease;
+  min-height: 28px;
+}
+
+.ssym-bar-group:hover,
+.ssym-bar-target:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.ssym-bar-group:active,
+.ssym-bar-target:active {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.ssym-bar-label,
+.ssym-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 11px;
+  line-height: 1.2;
+  color: var(--ssym-text-muted);
+}
+
+.ssym-bar-label span:first-child,
+.ssym-bar-title {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+.ssym-bar-value,
+.ssym-bar-values {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Progress Track & Fill */
+.ssym-bar-track {
+  position: relative;
+  height: 9px;
+  background: #111122;
+  border-radius: 5px;
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ssym-bar-fill-wrap {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ssym-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.ssym-toughness-fill,
+.ssym-bar-fill.toughness {
+  background: linear-gradient(90deg, #f44336 0%, #ff9800 45%, #4caf50 100%);
+}
+
+.ssym-bar-fill.toughness.low {
+  background: var(--ssym-toughness-low);
+}
+
+.ssym-bar-fill.toughness.mid {
+  background: var(--ssym-toughness-mid);
+}
+
+.ssym-bar-fill.toughness.high {
+  background: var(--ssym-toughness-high);
+}
+
+.ssym-corruption-fill,
+.ssym-bar-fill.corruption {
+  background: linear-gradient(90deg, var(--ssym-corruption-dark), var(--ssym-corruption));
+}
+
+/* Threshold Marker */
+.ssym-threshold-marker,
+.ssym-pain-threshold-marker {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  background-color: #ffffff;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.9);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.ssym-threshold-marker::after,
+.ssym-pain-threshold-marker::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 4px solid #ffffff;
+}
+
+.ssym-bar-warning {
+  position: absolute;
+  inset: 0;
+  border-radius: 5px;
+  border: 1px solid #ff4081;
+  animation: ssym-pulse-warning 1.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes ssym-pulse-warning {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; box-shadow: 0 0 6px #ff4081; }
+}
+
+.ssym-corruption-detail {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--ssym-text-dim);
+  margin-top: 2px;
+  padding: 0 2px;
+}
+
+/* ==========================================================================
+   4. Tab Navigation
+   ========================================================================== */
+
+.ssym-tabs {
+  display: flex;
+  gap: 2px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--ssym-border);
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ssym-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.ssym-tab {
+  flex: 1;
+  min-width: 60px;
+  min-height: 48px;
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 12px;
+  color: #888888;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+.ssym-tab:hover {
+  color: #c5c5d6;
+}
+
+.ssym-tab.active {
+  color: #ffffff;
+  border-bottom-color: var(--ssym-accent);
+  font-weight: 600;
+}
+
+.ssym-tab i,
+.ssym-tab svg {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+/* ==========================================================================
+   5. Section Content Container
+   ========================================================================== */
+
+.ssym-sections {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+.ssym-section {
+  padding: 12px;
+  display: none;
+}
+
+.ssym-section.active {
+  display: block;
+  animation: ssym-fade-in 0.2s ease-out;
+}
+
+@keyframes ssym-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   6. Stats Row (Defense, Initiative, Armor)
+   ========================================================================== */
+
+.ssym-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ssym-stat-capsule {
+  background: var(--ssym-bg-card);
+  border: 1px solid var(--ssym-border-light);
+  border-radius: var(--ssym-radius-md);
+  padding: 8px 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 52px;
+  box-shadow: var(--ssym-shadow-sm);
+  transition: transform 0.12s ease, background-color 0.15s ease;
+  user-select: none;
+}
+
+.ssym-stat-capsule.clickable {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.ssym-stat-capsule.clickable:active {
+  transform: scale(0.96);
+  background: var(--ssym-bg-card-hover);
+}
+
+.ssym-stat-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ssym-text-muted);
+  margin-bottom: 2px;
+}
+
+.ssym-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.ssym-stat-sub {
+  font-size: 10px;
+  color: var(--ssym-text-dim);
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   7. Attributes Grid (4 columns, 2 rows)
+   ========================================================================== */
+
+.ssym-attributes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ssym-attr-card,
+.ssym-attribute-card {
+  position: relative;
+  background: var(--ssym-bg-card);
+  border: 1px solid var(--ssym-border-light);
+  border-radius: var(--ssym-radius-md);
+  padding: 8px 4px;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  transition: transform 0.1s ease, background-color 0.15s ease, border-color 0.15s ease;
+  user-select: none;
+  box-shadow: var(--ssym-shadow-sm);
+}
+
+.ssym-attr-card:hover,
+.ssym-attribute-card:hover {
+  background: var(--ssym-bg-card-hover);
+  border-color: var(--ssym-border-highlight);
+}
+
+.ssym-attr-card:active,
+.ssym-attribute-card:active,
+.ssym-attr-card.ssym-pressed,
+.ssym-attribute-card.ssym-pressed {
+  transform: scale(0.94);
+  background: #323260;
+  border-color: var(--ssym-accent);
+}
+
+.ssym-attr-abbr {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ssym-text-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.ssym-attr-name {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ssym-text-dim);
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.ssym-attr-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.ssym-attr-mod {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: var(--ssym-accent);
+  color: #ffffff;
+  line-height: 1.2;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.ssym-attr-mod.positive {
+  background: #2e7d32;
+}
+
+.ssym-attr-mod.negative {
+  background: #c62828;
+}
+
+/* ==========================================================================
+   8. Item Lists (Weapons, Armor, Equipment, Powers, Abilities)
+   ========================================================================== */
+
+.ssym-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.ssym-item-row {
+  display: flex;
+  align-items: center;
+  background: var(--ssym-bg-card);
+  border: 1px solid var(--ssym-border-light);
+  border-radius: var(--ssym-radius-md);
+  padding: 8px 10px;
+  gap: 10px;
+  min-height: 48px;
+  transition: background-color 0.15s ease;
+}
+
+.ssym-item-row:hover {
+  background: var(--ssym-bg-card-hover);
+}
+
+.ssym-item-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--ssym-radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--ssym-bg-secondary);
+  border: 1px solid var(--ssym-border);
+}
+
+.ssym-item-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ssym-item-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ssym-item-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ssym-item-sub {
+  font-size: 11px;
+  color: var(--ssym-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+.ssym-item-qty,
+.ssym-item-quantity {
+  font-size: 11px;
+  color: var(--ssym-text-dim);
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+.ssym-item-actions {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ssym-action-btn {
+  border: none;
+  border-radius: var(--ssym-radius-sm);
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  touch-action: manipulation;
+  min-height: 44px; /* Accessible minimum touch target */
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: transform 0.1s ease, filter 0.15s ease, background-color 0.15s ease;
+  user-select: none;
+}
+
+.ssym-action-btn:active {
+  transform: scale(0.93);
+  filter: brightness(0.85);
+}
+
+.ssym-action-btn.attack {
+  background: var(--ssym-attack);
+}
+
+.ssym-action-btn.attack:hover {
+  background: var(--ssym-attack-hover);
+}
+
+.ssym-action-btn.damage {
+  background: var(--ssym-damage);
+}
+
+.ssym-action-btn.damage:hover {
+  background: var(--ssym-damage-hover);
+}
+
+.ssym-action-btn.protect {
+  background: var(--ssym-protect);
+}
+
+.ssym-action-btn.protect:hover {
+  background: var(--ssym-protect-hover);
+}
+
+.ssym-action-btn.use {
+  background: var(--ssym-use);
+}
+
+.ssym-action-btn.use:hover {
+  background: var(--ssym-use-hover);
+}
+
+/* Rank Badges */
+.ssym-rank-badge {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: #ffffff;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+.ssym-rank-badge.novice {
+  background: var(--ssym-rank-novice);
+}
+
+.ssym-rank-badge.adept {
+  background: var(--ssym-rank-adept);
+}
+
+.ssym-rank-badge.master {
+  background: var(--ssym-rank-master);
+  color: #1a1a2e;
+}
+
+/* ==========================================================================
+   9. Section Titles
+   ========================================================================== */
+
+.ssym-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--ssym-text-muted);
+  padding-bottom: 6px;
+  margin: 14px 0 8px 0;
+  border-bottom: 1px solid var(--ssym-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ssym-section-title:first-child {
+  margin-top: 2px;
+}
+
+.ssym-section-hint {
+  font-size: 10px;
+  font-weight: normal;
+  text-transform: none;
+  color: var(--ssym-text-dim);
+  letter-spacing: normal;
+}
+
+.ssym-section-title-badge {
+  font-size: 10px;
+  font-weight: 600;
+  background: var(--ssym-bg-elevated);
+  padding: 1px 6px;
+  border-radius: 10px;
+  color: var(--ssym-text-dim);
+}
+
+/* ==========================================================================
+   10. Money Row
+   ========================================================================== */
+
+.ssym-money-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ssym-money-card {
+  background: var(--ssym-bg-card);
+  border: 1px solid var(--ssym-border-light);
+  border-radius: var(--ssym-radius-md);
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+}
+
+.ssym-money-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.ssym-money-icon.thaler {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.4);
+}
+
+.ssym-money-icon.shilling {
+  background: rgba(189, 189, 189, 0.2);
+  color: #e0e0e0;
+  border: 1px solid rgba(189, 189, 189, 0.4);
+}
+
+.ssym-money-icon.orteg {
+  background: rgba(161, 110, 76, 0.2);
+  color: #c97f4e;
+  border: 1px solid rgba(161, 110, 76, 0.4);
+}
+
+.ssym-money-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ssym-money-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--ssym-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.ssym-money-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   11. XP Row
+   ========================================================================== */
+
+.ssym-xp-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ssym-xp-card,
+.ssym-xp-item {
+  background: var(--ssym-bg-card);
+  border: 1px solid var(--ssym-border-light);
+  border-radius: var(--ssym-radius-md);
+  padding: 8px 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 48px;
+  justify-content: center;
+}
+
+.ssym-xp-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--ssym-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.ssym-xp-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.ssym-xp-value.available,
+.ssym-xp-value.ssym-xp-available,
+.ssym-xp-available {
+  color: #69f0ae;
+}
+
+/* ==========================================================================
+   12. Empty Messages
+   ========================================================================== */
+
+.ssym-empty {
+  font-style: italic;
+  color: var(--ssym-text-dim);
+  text-align: center;
+  padding: 16px 8px;
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   13. Boons, Burdens & Trait Tags
+   ========================================================================== */
+
+.ssym-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.ssym-tag {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: var(--ssym-radius-sm);
+  background: var(--ssym-bg-card);
+  border: 1px solid var(--ssym-border-light);
+  color: var(--ssym-text-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ssym-tag.boon {
+  border-color: rgba(76, 175, 80, 0.4);
+  background: rgba(76, 175, 80, 0.1);
+  color: #a5d6a7;
+}
+
+.ssym-tag.burden {
+  border-color: rgba(244, 67, 54, 0.4);
+  background: rgba(244, 67, 54, 0.1);
+  color: #ef9a9a;
+}
+
+/* ==========================================================================
+   14. Edit Dialog (Toughness & Corruption)
+   ========================================================================== */
+
+/* Foundry VTT window styling when swipe dialog is rendered */
+.window-app:has(.ssym-dialog) {
+  background: var(--ssym-bg-secondary) !important;
+  border: 1px solid var(--ssym-border) !important;
+  border-radius: var(--ssym-radius-lg) !important;
+  color: var(--ssym-text-main) !important;
+  box-shadow: var(--ssym-shadow-lg) !important;
+}
+
+.window-app:has(.ssym-dialog) .window-header {
+  border-bottom: 1px solid var(--ssym-border);
+  color: #ffffff;
+}
+
+.window-app:has(.ssym-dialog) .dialog-button {
+  min-height: 44px;
+  border-radius: 8px;
+  background: var(--ssym-bg-card);
+  border: 1px solid var(--ssym-border);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.window-app:has(.ssym-dialog) .dialog-button.default,
+.window-app:has(.ssym-dialog) .dialog-button.apply {
+  background: var(--ssym-accent);
+  border-color: var(--ssym-accent);
+}
+
+/* Standalone Backdrop & Container */
+.ssym-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.ssym-dialog-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ssym-dialog {
+  background: var(--ssym-bg-secondary);
+  border: 1px solid var(--ssym-border);
+  border-radius: var(--ssym-radius-lg);
+  padding: 16px;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-sizing: border-box;
+}
+
+.ssym-dialog-backdrop.open .ssym-dialog {
+  transform: scale(1);
+}
+
+.ssym-dialog-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+}
+
+.ssym-dialog-current {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ssym-text-muted);
+}
+
+.ssym-dialog-current strong,
+.ssym-dialog-current span {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 18px;
+  margin-left: 4px;
+}
+
+.ssym-dialog-buttons,
+.ssym-dialog-quick-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.ssym-delta-btn,
+.ssym-quick-btn {
+  flex: 1;
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--ssym-border);
+  background: var(--ssym-bg-card);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.ssym-delta-btn:hover,
+.ssym-quick-btn:hover {
+  background: var(--ssym-bg-card-hover);
+}
+
+.ssym-delta-btn:active,
+.ssym-quick-btn:active {
+  transform: scale(0.94);
+}
+
+.ssym-delta-btn:not(.ssym-delta-pos):not(.plus),
+.ssym-quick-btn.minus {
+  color: #ff8a80;
+}
+
+.ssym-delta-pos,
+.ssym-quick-btn.plus {
+  color: #b9f6ca;
+}
+
+.ssym-dialog-input,
+.ssym-dialog-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ssym-dialog-input label,
+.ssym-dialog-input-group label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ssym-text-muted);
+}
+
+.ssym-dialog-input input,
+.ssym-dialog-input input[type="number"] {
+  width: 100%;
+  height: 44px;
+  background: var(--ssym-bg-input);
+  border: 1px solid var(--ssym-border);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ssym-dialog-input input:focus {
+  border-color: var(--ssym-accent);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.25);
+}
+
+.ssym-dialog-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ssym-dialog-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ssym-dialog-field label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ssym-text-muted);
+}
+
+.ssym-dialog-buttons-sm {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.ssym-dialog-buttons-sm .ssym-delta-btn {
+  flex: 0 0 44px;
+  min-height: 44px;
+}
+
+.ssym-dialog-buttons-sm input {
+  flex: 1;
+  height: 44px;
+  background: var(--ssym-bg-input);
+  border: 1px solid var(--ssym-border);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.ssym-dialog-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.ssym-dialog-btn {
+  flex: 1;
+  min-height: 44px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.ssym-dialog-btn.cancel {
+  background: var(--ssym-bg-card);
+  color: var(--ssym-text-muted);
+  border: 1px solid var(--ssym-border);
+}
+
+.ssym-dialog-btn.cancel:hover {
+  background: var(--ssym-bg-card-hover);
+  color: #ffffff;
+}
+
+.ssym-dialog-btn.apply {
+  background: var(--ssym-accent);
+  color: #ffffff;
+}
+
+.ssym-dialog-btn.apply:hover {
+  background: var(--ssym-accent-hover);
+}
+
+.ssym-dialog-btn:active {
+  transform: scale(0.96);
+}
+
+/* ==========================================================================
+   15. Floating Action / Toggle Button (Optional helper for opening drawer)
+   ========================================================================== */
+
+.ssym-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--ssym-accent);
+  color: #ffffff;
+  border: none;
+  box-shadow: var(--ssym-shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 9990;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  touch-action: manipulation;
+}
+
+.ssym-toggle-btn:hover {
+  background: var(--ssym-accent-hover);
+  transform: scale(1.06);
+}
+
+.ssym-toggle-btn:active {
+  transform: scale(0.94);
+}
+
+/* ==========================================================================
+   16. Responsive Rules (> 600px)
+   ========================================================================== */
+
+@media (min-width: 601px) {
+  .ssym-drawer {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, 100%);
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--ssym-radius-lg) var(--ssym-radius-lg) 0 0;
+    border-left: 1px solid var(--ssym-border-light);
+    border-right: 1px solid var(--ssym-border-light);
+  }
+
+  .ssym-drawer.open {
+    transform: translate(-50%, 0);
+  }
+}
+
+/* ==========================================================================
+   17. Symbaroum HUD Suppression on Mobile Devices
+   ========================================================================== */
+
+body.swipe-symbaroum-active #symbaroum-hud,
+body.swipe-symbaroum-active #symbaroum-hud-hostility-tint,
+body.swipe-symbaroum-active .symbaroum-hud,
+body.swipe-symbaroum-hide-hud #symbaroum-hud,
+body.swipe-symbaroum-hide-hud #symbaroum-hud-hostility-tint,
+body.swipe-symbaroum-hide-hud .symbaroum-hud {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(100%) !important;
+}
+
+@media (max-width: 1024px), (pointer: coarse) {
+  body.swipe-symbaroum-active #symbaroum-hud,
+  body.swipe-symbaroum-active #symbaroum-hud-hostility-tint,
+  body.swipe-symbaroum-active .symbaroum-hud,
+  #symbaroum-hud,
+  #symbaroum-hud-hostility-tint,
+  .symbaroum-hud {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+  }
+}
+

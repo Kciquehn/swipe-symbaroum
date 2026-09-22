@@ -1,0 +1,51 @@
+{
+  "id": "swipe-symbaroum",
+  "title": "Swipe Symbaroum - Mobile Character Sheet",
+  "description": "Mobile-optimized character sheet for the Symbaroum system. Provides a touch-friendly slide-up drawer with tabs for attributes, combat, powers, and inventory.",
+  "version": "1.0.0",
+  "url": "https://github.com/Kciquehn/swipe-symbaroum",
+  "manifest": "https://raw.githubusercontent.com/Kciquehn/swipe-symbaroum/main/module.json",
+  "download": "https://github.com/Kciquehn/swipe-symbaroum/releases/latest/download/swipe-symbaroum.zip",
+  "readme": "https://github.com/Kciquehn/swipe-symbaroum#readme",
+  "license": "https://github.com/Kciquehn/swipe-symbaroum/blob/main/LICENSE",
+  "bugs": "https://github.com/Kciquehn/swipe-symbaroum/issues",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "Kciquehn",
+      "url": "https://github.com/Kciquehn"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "symbaroum",
+        "type": "system",
+        "compatibility": {
+          "minimum": "6.0.0"
+        }
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    "styles/swipe-symbaroum.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ]
+}
