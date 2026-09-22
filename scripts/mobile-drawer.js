@@ -155,47 +155,44 @@ export class SymbaroumMobileDrawer {
     if (tPct < 25) tColor = '#F44336'; // Red
 
     this.headerEl.innerHTML = `
-      <div class="ssym-header-top">
-        <div class="ssym-avatar-wrap">
-          <img class="ssym-avatar" src="${a.img}" alt="${a.name}" />
+      <div class="ssym-header-layout">
+        <div class="ssym-portrait-wrap">
+          <img class="ssym-portrait" src="${a.img}" alt="${a.name}" />
         </div>
-        <div class="ssym-info">
-          <div class="ssym-name">${a.name}</div>
-          <div class="ssym-badges">
-            ${sys.bio?.race ? `<span class="ssym-badge">${sys.bio.race}</span>` : ''}
-            ${sys.bio?.occupation ? `<span class="ssym-badge">${sys.bio.occupation}</span>` : ''}
-            ${sys.bio?.shadow ? `<span class="ssym-badge ssym-badge-shadow" title="${i18n('SWIPE_SYM.Shadow')}"><i class="fas fa-moon"></i> ${sys.bio.shadow}</span>` : ''}
+        <div class="ssym-header-body">
+          <div class="ssym-header-info">
+            <div class="ssym-name">${a.name}</div>
+            <div class="ssym-badges">
+              ${sys.bio?.race ? `<span class="ssym-badge">${sys.bio.race}</span>` : ''}
+              ${sys.bio?.occupation ? `<span class="ssym-badge">${sys.bio.occupation}</span>` : ''}
+              ${sys.bio?.shadow ? `<span class="ssym-badge ssym-badge-shadow" title="${i18n('SWIPE_SYM.Shadow')}"><i class="fas fa-moon"></i> ${sys.bio.shadow}</span>` : ''}
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="ssym-bars">
-        <div class="ssym-bar-group" data-action="edit-toughness">
-          <div class="ssym-bar-label">
-            <span class="ssym-bar-title"><i class="fas fa-heart"></i> ${i18n('SWIPE_SYM.Toughness')}</span>
-            <span class="ssym-bar-threshold-badge" title="${i18n('SWIPE_SYM.PainThreshold')}">◆ Limiar: <strong>${tThreshold}</strong></span>
-            <span class="ssym-bar-value">${tVal} / ${tMax}</span>
-          </div>
-          <div class="ssym-bar-track">
-            <div class="ssym-bar-fill ssym-toughness-fill" style="width: ${tPct}%; background: ${tColor};"></div>
-            <div class="ssym-threshold-marker" style="left: ${tThreshPct}%;" title="${i18n('SWIPE_SYM.PainThreshold')}: ${tThreshold}"></div>
-          </div>
-        </div>
+          <div class="ssym-bars">
+            <div class="ssym-bar-group" data-action="edit-toughness">
+              <div class="ssym-bar-label">
+                <span class="ssym-bar-title"><i class="fas fa-heart"></i> ${i18n('SWIPE_SYM.Toughness')}</span>
+                <span class="ssym-bar-threshold-badge" title="${i18n('SWIPE_SYM.PainThreshold')}">◆ Limiar: <strong>${tThreshold}</strong></span>
+                <span class="ssym-bar-value">${tVal} / ${tMax}</span>
+              </div>
+              <div class="ssym-bar-track">
+                <div class="ssym-bar-fill ssym-toughness-fill" style="width: ${tPct}%; background: ${tColor};"></div>
+                <div class="ssym-threshold-marker" style="left: ${tThreshPct}%;" title="${i18n('SWIPE_SYM.PainThreshold')}: ${tThreshold}"></div>
+              </div>
+            </div>
 
-        <div class="ssym-bar-group" data-action="edit-corruption">
-          <div class="ssym-bar-label">
-            <span class="ssym-bar-title"><i class="fas fa-skull"></i> ${i18n('SWIPE_SYM.Corruption')}</span>
-            <span class="ssym-bar-threshold-badge" title="${i18n('SWIPE_SYM.CorruptionThreshold')}">◆ Limiar: <strong>${cThreshold}</strong></span>
-            <span class="ssym-bar-value">${cVal} / ${cMax}</span>
-          </div>
-          <div class="ssym-bar-track">
-            <div class="ssym-bar-fill ssym-corruption-fill" style="width: ${cPct}%;"></div>
-            ${cPct >= (cThreshold / cMax * 100) ? '<div class="ssym-bar-warning"></div>' : ''}
-          </div>
-          <div class="ssym-corruption-detail">
-            <span>${i18n('SWIPE_SYM.Temporary')}: ${cTemp}</span>
-            <span>${i18n('SWIPE_SYM.Longterm')}: ${cLong}</span>
-            <span>${i18n('SWIPE_SYM.Permanent')}: ${cPerm}</span>
+            <div class="ssym-bar-group" data-action="edit-corruption">
+              <div class="ssym-bar-label">
+                <span class="ssym-bar-title"><i class="fas fa-skull"></i> ${i18n('SWIPE_SYM.Corruption')}</span>
+                <span class="ssym-bar-threshold-badge" title="${i18n('SWIPE_SYM.CorruptionThreshold')}">◆ Limiar: <strong>${cThreshold}</strong></span>
+                <span class="ssym-bar-value">${cVal} / ${cMax}</span>
+              </div>
+              <div class="ssym-bar-track">
+                <div class="ssym-bar-fill ssym-corruption-fill" style="width: ${cPct}%;"></div>
+                ${cPct >= (cThreshold / cMax * 100) ? '<div class="ssym-bar-warning"></div>' : ''}
+              </div>
+            </div>
           </div>
         </div>
       </div>

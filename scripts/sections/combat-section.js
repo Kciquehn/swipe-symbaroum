@@ -9,6 +9,7 @@ export class CombatSection {
   constructor(actor, drawer) {
     this.actor = actor;
     this.drawer = drawer;
+    this.expandedWeapons = new Set();
   }
 
   get id() { return 'combat'; }
@@ -113,6 +114,7 @@ export class CombatSection {
   _renderWeapon(weapon) {
     const sys = weapon.system;
     const isDrawn = this._isWeaponDrawn(weapon);
+    const isExpanded = this.expandedWeapons.has(weapon.id);
     const attrKey = sys.attribute || 'accurate';
     const attrLabel = i18n(`ATTRIBUTE.${attrKey.toUpperCase()}ABBR`);
     const damage = sys.baseDamage || '1d8';
@@ -120,16 +122,19 @@ export class CombatSection {
     const qualities = this._getActiveQualities(sys.qualities);
 
     return `
-      <div class="ssym-item-card ${isDrawn ? 'is-drawn' : 'is-sheathed'}" data-item-id="${weapon.id}">
+      <div class="ssym-item-card is-collapsible ${isExpanded ? 'is-expanded' : ''} ${isDrawn ? 'is-drawn' : 'is-sheathed'}" data-item-id="${weapon.id}">
         <div class="ssym-item-main">
           <img class="ssym-item-icon" src="${weapon.img}" alt="${weapon.name}" />
           <div class="ssym-item-content">
             <div class="ssym-item-title-row">
               <span class="ssym-item-name">${weapon.name}</span>
-              <button type="button" class="ssym-badge-btn ${isDrawn ? 'drawn' : 'sheathed'}" data-action="toggle-drawn" data-item-id="${weapon.id}" title="${isDrawn ? i18n('SWIPE_SYM.Sheathe') : i18n('SWIPE_SYM.Draw')}">
-                <i class="fas ${isDrawn ? 'fa-hand-fist' : 'fa-hand'}"></i>
-                <span>${isDrawn ? i18n('SWIPE_SYM.Drawn') : i18n('SWIPE_SYM.Sheathed')}</span>
-              </button>
+              <div class="ssym-item-badges-wrap">
+                <button type="button" class="ssym-badge-btn ${isDrawn ? 'drawn' : 'sheathed'}" data-action="toggle-drawn" data-item-id="${weapon.id}" title="${isDrawn ? i18n('SWIPE_SYM.Sheathe') : i18n('SWIPE_SYM.Draw')}">
+                  <i class="fas ${isDrawn ? 'fa-hand-fist' : 'fa-hand'}"></i>
+                  <span>${isDrawn ? i18n('SWIPE_SYM.Drawn') : i18n('SWIPE_SYM.Sheathed')}</span>
+                </button>
+                <i class="fas fa-chevron-down ssym-expand-icon"></i>
+              </div>
             </div>
             <div class="ssym-item-tags">
               <span class="ssym-tag ssym-tag-attr">${attrLabel}</span>
@@ -297,6 +302,20 @@ export class CombatSection {
         btn.classList.add('ssym-pressed');
         setTimeout(() => btn.classList.remove('ssym-pressed'), 200);
         await this._rollArmor();
+      });
+    });
+
+    // Collapsible cards: single click/tap to toggle action buttons
+    container.querySelectorAll('.ssym-item-card.is-collapsible').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('button') || e.target.closest('.ssym-badge-btn')) return;
+        const itemId = card.dataset.itemId;
+        card.classList.toggle('is-expanded');
+        if (card.classList.contains('is-expanded')) {
+          this.expandedWeapons.add(itemId);
+        } else {
+          this.expandedWeapons.delete(itemId);
+        }
       });
     });
 

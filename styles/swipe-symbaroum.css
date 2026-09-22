@@ -157,57 +157,64 @@
    ========================================================================== */
 
 .ssym-header {
-  padding: 4px 16px 12px 16px;
+  padding: 6px 14px 10px 14px;
   border-bottom: 1px solid var(--ssym-border);
   flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
-.ssym-header-top {
+.ssym-header-layout {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 12px;
 }
 
-.ssym-avatar-wrap,
-.ssym-avatar-wrapper {
-  position: relative;
+.ssym-portrait-wrap {
+  width: 76px;
+  min-width: 76px;
+  height: 104px;
   flex-shrink: 0;
-}
-
-.ssym-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
+  border-radius: var(--ssym-radius-md);
+  overflow: hidden;
   border: 2px solid var(--ssym-gold);
   box-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
   background-color: var(--ssym-bg-secondary);
+}
+
+.ssym-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
   display: block;
 }
 
-.ssym-info,
-.ssym-header-info {
+.ssym-header-body {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 4px;
+}
+
+.ssym-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .ssym-name,
 .ssym-char-name {
   font-family: var(--ssym-font-serif);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--ssym-gold-bright);
-  letter-spacing: 0.6px;
+  letter-spacing: 0.5px;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .ssym-name-row {
@@ -220,18 +227,18 @@
 .ssym-badges,
 .ssym-header-badges {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   align-items: center;
   flex-wrap: wrap;
 }
 
 .ssym-badge {
   font-family: var(--ssym-font-serif);
-  font-size: 9.5px;
+  font-size: 8.5px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  padding: 2px 7px;
+  letter-spacing: 0.6px;
+  padding: 1.5px 6px;
   border-radius: 4px;
   background: rgba(197, 160, 89, 0.1);
   border: 1px solid rgba(197, 160, 89, 0.28);
@@ -244,26 +251,25 @@
   color: #d1a4e0;
 }
 
-/* Resource Bar Groups (Tap Targets) */
+/* Resource Bar Groups (Compact in header body) */
 .ssym-bars,
 .ssym-header-bars {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
 }
 
 .ssym-bar-group,
 .ssym-bar-target {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   cursor: pointer;
   touch-action: manipulation;
-  padding: 4px 6px;
-  margin: 0 -6px;
+  padding: 2px 4px;
+  margin: 0 -4px;
   border-radius: var(--ssym-radius-sm);
   transition: background-color 0.15s ease;
-  min-height: 28px;
 }
 
 .ssym-bar-group:hover,
@@ -281,8 +287,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 11px;
-  line-height: 1.2;
+  font-size: 10px;
+  line-height: 1.1;
   color: var(--ssym-text-muted);
 }
 
@@ -291,22 +297,22 @@
   font-family: var(--ssym-font-serif);
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 10.5px;
-  letter-spacing: 0.8px;
+  font-size: 9.5px;
+  letter-spacing: 0.6px;
   color: var(--ssym-gold-bright);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .ssym-bar-threshold-badge {
   font-family: var(--ssym-font-serif);
-  font-size: 9.5px;
-  letter-spacing: 0.5px;
+  font-size: 8.5px;
+  letter-spacing: 0.4px;
   color: var(--ssym-gold-bright);
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(197, 160, 89, 0.3);
-  padding: 1px 6px;
+  padding: 0 5px;
   border-radius: 3px;
 }
 
@@ -317,7 +323,7 @@
 .ssym-bar-value,
 .ssym-bar-values {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 11.5px;
+  font-size: 10.5px;
   font-weight: 700;
   color: #ffffff;
 }
@@ -325,9 +331,9 @@
 /* Progress Track & Fill */
 .ssym-bar-track {
   position: relative;
-  height: 9px;
+  height: 7px;
   background: #111122;
-  border-radius: 5px;
+  border-radius: 4px;
   overflow: visible;
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -946,6 +952,49 @@
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Collapsible Item Cards (Weapons) */
+.ssym-item-card.is-collapsible .ssym-item-main {
+  cursor: pointer;
+}
+
+.ssym-item-badges-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ssym-expand-icon {
+  font-size: 10px;
+  color: var(--ssym-gold-dim);
+  transition: transform 0.2s ease, color 0.2s ease;
+  padding: 2px 4px;
+}
+
+.ssym-item-card.is-collapsible.is-expanded .ssym-expand-icon {
+  transform: rotate(180deg);
+  color: var(--ssym-gold-bright);
+}
+
+.ssym-item-card.is-collapsible .ssym-item-footer {
+  display: none;
+}
+
+.ssym-item-card.is-collapsible.is-expanded .ssym-item-footer {
+  display: flex;
+  animation: ssym-slide-down 0.18s ease-out;
+}
+
+@keyframes ssym-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .ssym-card-btn {
   flex: 1;
   min-height: 38px;
@@ -1006,6 +1055,18 @@
   background: linear-gradient(135deg, #5b1b74 0%, #350f44 100%);
   border: 1px solid rgba(170, 70, 220, 0.4);
   box-shadow: 0 2px 8px rgba(91, 27, 116, 0.4);
+}
+
+.ssym-btn-ability {
+  background: linear-gradient(135deg, #1b5e20 0%, #0d3311 100%);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  box-shadow: 0 2px 8px rgba(27, 94, 32, 0.4);
+}
+
+.ssym-btn-info {
+  background: rgba(197, 160, 89, 0.12);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  color: var(--ssym-gold-bright);
 }
 
 /* Official Symbaroum 3-Rank Diamonds (Noviço, Adepto, Mestre) */
