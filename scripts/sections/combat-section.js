@@ -19,6 +19,14 @@ export class CombatSection {
   render(container) {
     container.innerHTML = `<div class="ssym-section active">${this._getHTML()}</div>`;
     this._bindEvents(container);
+
+    // Auto-scroll combat carousel to current combatant
+    requestAnimationFrame(() => {
+      const activeCard = container.querySelector('.ssym-carousel-card.is-current');
+      if (activeCard) {
+        activeCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    });
   }
 
   // ─── Weapon Readiness Helpers (symbaroum-ind-resources) ─────────────────────
@@ -48,6 +56,65 @@ export class CombatSection {
     this.drawer.renderCurrentSection();
   }
 
+  _renderCombatCarousel() {
+    const combat = game.combat;
+    if (!combat || !combat.turns || combat.turns.length === 0) {
+      return '';
+    }
+
+    const currentCombatant = combat.combatant;
+    const isMyTurn = currentCombatant?.actor?.id === this.actor.id;
+    const canPassTurn = isMyTurn || game.user.isGM;
+
+    // Filter hidden combatants if user is not GM
+    const turns = combat.turns.filter(c => !c.hidden || game.user.isGM);
+    if (turns.length === 0) return '';
+
+    const cardsHtml = turns.map(c => {
+      const isCurrent = c.id === currentCombatant?.id;
+      const isMe = c.actor?.id === this.actor.id;
+      const isDefeated = Boolean(c.defeated);
+      const init = (c.initiative !== null && c.initiative !== undefined) ? c.initiative : '-';
+      const img = c.img || c.actor?.img || 'icons/svg/mystery-man.svg';
+      const name = c.name || c.actor?.name || '???';
+
+      return `
+        <div class="ssym-carousel-card ${isCurrent ? 'is-current' : ''} ${isMe ? 'is-me' : ''} ${isDefeated ? 'is-defeated' : ''}" data-combatant-id="${c.id}" title="${name}">
+          <div class="ssym-carousel-avatar-wrap">
+            <img class="ssym-carousel-avatar" src="${img}" alt="${name}" />
+            ${isCurrent ? '<div class="ssym-carousel-turn-indicator"><i class="fas fa-caret-up"></i></div>' : ''}
+            <span class="ssym-carousel-init-badge">${init}</span>
+            ${isDefeated ? '<div class="ssym-carousel-defeated-overlay"><i class="fas fa-skull"></i></div>' : ''}
+          </div>
+          <div class="ssym-carousel-name">${name}</div>
+          ${isMe ? `<span class="ssym-carousel-me-tag">${i18n('SWIPE_SYM.You')}</span>` : ''}
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <!-- Combat Tracker Carousel -->
+      <div class="ssym-carousel-container">
+        <div class="ssym-carousel-header">
+          <div class="ssym-carousel-title-wrap">
+            <i class="fas fa-swords ssym-carousel-icon"></i>
+            <span class="ssym-carousel-round">${i18n('SWIPE_SYM.Round')} <strong>${combat.round || 1}</strong></span>
+            ${isMyTurn ? `<span class="ssym-carousel-myturn-chip"><i class="fas fa-bolt"></i> ${i18n('SWIPE_SYM.YourTurn')}</span>` : ''}
+          </div>
+          ${canPassTurn ? `
+            <button type="button" class="ssym-btn-end-turn" data-action="next-turn" title="${i18n('SWIPE_SYM.EndTurn')}">
+              <span>${i18n('SWIPE_SYM.EndTurn')}</span>
+              <i class="fas fa-forward-step"></i>
+            </button>
+          ` : ''}
+        </div>
+        <div class="ssym-carousel-track">
+          ${cardsHtml}
+        </div>
+      </div>
+    `;
+  }
+
   // ─── HTML Generation ───────────────────────────────────────────────────────
 
   _getHTML() {
@@ -71,8 +138,11 @@ export class CombatSection {
     });
 
     const hasReadiness = this._isWeaponReadinessActive();
+    const combatCarousel = this._renderCombatCarousel();
 
     return `
+      ${combatCarousel}
+
       <!-- Weapons Section -->
       <div class="ssym-section-header">
         <div class="ssym-section-title">${i18n('SWIPE_SYM.Weapons')}</div>
@@ -302,6 +372,33 @@ export class CombatSection {
         btn.classList.add('ssym-pressed');
         setTimeout(() => btn.classList.remove('ssym-pressed'), 200);
         await this._rollArmor();
+      });
+    });
+
+    // Pass turn in combat carousel
+    container.querySelectorAll('[data-action="next-turn"]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        btn.classList.add('ssym-pressed');
+        setTimeout(() => btn.classList.remove('ssym-pressed'), 200);
+        if (game.combat) {
+          await game.combat.nextTurn();
+        }
+      });
+    });
+
+    // Tap combatant in carousel to ping / center
+    container.querySelectorAll('.ssym-carousel-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const combatantId = card.dataset.combatantId;
+        const combatant = game.combat?.combatants.get(combatantId);
+        if (combatant?.token) {
+          const tokenObj = combatant.token.object;
+          if (tokenObj) {
+            canvas.animatePan?.({ x: tokenObj.center.x, y: tokenObj.center.y, duration: 250 });
+            canvas.ping?.(tokenObj.center);
+          }
+        }
       });
     });
 

@@ -61,5 +61,11 @@
   "SWIPE_SYM.ManageWeapons": "Sacar / Guardar",
   "SWIPE_SYM.CorruptionThreshold": "Limiar de Corrupção",
   "SWIPE_SYM.Shadow": "Sombra",
-  "SWIPE_SYM.ViewDetails": "Ver Detalhes"
+  "SWIPE_SYM.ViewDetails": "Ver Detalhes",
+  "SWIPE_SYM.Round": "Rodada",
+  "SWIPE_SYM.Turn": "Turno",
+  "SWIPE_SYM.EndTurn": "Passar Turno",
+  "SWIPE_SYM.YourTurn": "Seu Turno!",
+  "SWIPE_SYM.ActiveCombat": "Combate Ativo",
+  "SWIPE_SYM.You": "Você"
 }

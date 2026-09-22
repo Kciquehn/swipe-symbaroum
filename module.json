@@ -2,7 +2,7 @@
   "id": "swipe-symbaroum",
   "title": "Swipe Symbaroum - Mobile Character Sheet",
   "description": "Mobile-optimized character sheet for the Symbaroum system. Provides a touch-friendly slide-up drawer with tabs for attributes, combat, powers, and inventory.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "url": "https://github.com/Kciquehn/swipe-symbaroum",
   "manifest": "https://raw.githubusercontent.com/Kciquehn/swipe-symbaroum/main/module.json",
   "download": "https://github.com/Kciquehn/swipe-symbaroum/releases/latest/download/swipe-symbaroum.zip",

@@ -61,5 +61,11 @@
   "SWIPE_SYM.ManageWeapons": "Draw / Sheathe",
   "SWIPE_SYM.CorruptionThreshold": "Corruption Threshold",
   "SWIPE_SYM.Shadow": "Shadow",
-  "SWIPE_SYM.ViewDetails": "View Details"
+  "SWIPE_SYM.ViewDetails": "View Details",
+  "SWIPE_SYM.Round": "Round",
+  "SWIPE_SYM.Turn": "Turn",
+  "SWIPE_SYM.EndTurn": "Pass Turn",
+  "SWIPE_SYM.YourTurn": "Your Turn!",
+  "SWIPE_SYM.ActiveCombat": "Active Combat",
+  "SWIPE_SYM.You": "You"
 }

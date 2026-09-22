@@ -726,6 +726,245 @@
   background: rgba(197, 160, 89, 0.28);
 }
 
+/* ==========================================================================
+   Combat Tracker Carousel (Mobile Ripper93 Carousel Style)
+   ========================================================================== */
+
+.ssym-carousel-container {
+  background: var(--ssym-bg-card);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  border-radius: var(--ssym-radius-md);
+  padding: 8px 10px 10px 10px;
+  margin-bottom: 14px;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ssym-carousel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.18);
+}
+
+.ssym-carousel-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--ssym-font-serif);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--ssym-gold-bright);
+}
+
+.ssym-carousel-icon {
+  color: var(--ssym-gold);
+  font-size: 12px;
+}
+
+.ssym-carousel-round strong {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.ssym-carousel-myturn-chip {
+  background: rgba(76, 175, 80, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.55);
+  color: #a5d6a7;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1.5px 6px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  animation: ssym-pulse-turn 1.4s infinite;
+}
+
+@keyframes ssym-pulse-turn {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.ssym-btn-end-turn {
+  background: linear-gradient(135deg, rgba(197, 160, 89, 0.28) 0%, rgba(197, 160, 89, 0.12) 100%);
+  border: 1px solid var(--ssym-gold);
+  color: var(--ssym-gold-bright);
+  font-family: var(--ssym-font-serif);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 3px 9px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ssym-btn-end-turn:active {
+  transform: scale(0.94);
+  background: rgba(197, 160, 89, 0.45);
+}
+
+/* Horizontal Track of Combatants */
+.ssym-carousel-track {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 4px 6px 4px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ssym-gold-dim) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ssym-carousel-track::-webkit-scrollbar {
+  height: 3px;
+}
+
+.ssym-carousel-track::-webkit-scrollbar-thumb {
+  background: var(--ssym-gold-dim);
+  border-radius: 3px;
+}
+
+/* Individual Combatant Card */
+.ssym-carousel-card {
+  flex: 0 0 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  touch-action: manipulation;
+  position: relative;
+  transition: transform 0.15s ease;
+  user-select: none;
+}
+
+.ssym-carousel-card:active {
+  transform: scale(0.94);
+}
+
+.ssym-carousel-avatar-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  border: 2px solid rgba(197, 160, 89, 0.3);
+  background: var(--ssym-bg-secondary);
+  transition: all 0.2s ease;
+}
+
+.ssym-carousel-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Active Turn State */
+.ssym-carousel-card.is-current .ssym-carousel-avatar-wrap {
+  border-color: var(--ssym-gold-bright);
+  box-shadow: 0 0 10px rgba(197, 160, 89, 0.8), 0 0 3px #ffffff;
+  transform: scale(1.1);
+}
+
+.ssym-carousel-turn-indicator {
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--ssym-gold-bright);
+  font-size: 13px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.8));
+}
+
+/* Initiative Number Badge */
+.ssym-carousel-init-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  background: #111215;
+  border: 1px solid var(--ssym-gold-dim);
+  color: var(--ssym-gold-bright);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.ssym-carousel-card.is-current .ssym-carousel-init-badge {
+  background: var(--ssym-gold);
+  color: #111215;
+  border-color: #ffffff;
+}
+
+/* Defeated state */
+.ssym-carousel-card.is-defeated {
+  opacity: 0.4;
+  filter: grayscale(0.8);
+}
+
+.ssym-carousel-defeated-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f44336;
+  font-size: 16px;
+}
+
+/* Combatant Name */
+.ssym-carousel-name {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--ssym-text-main);
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.2px;
+}
+
+.ssym-carousel-card.is-current .ssym-carousel-name {
+  color: var(--ssym-gold-bright);
+  font-weight: 700;
+}
+
+/* Tag for Player's own character */
+.ssym-carousel-me-tag {
+  font-family: var(--ssym-font-serif);
+  font-size: 7.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #a5d6a7;
+  background: rgba(76, 175, 80, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.45);
+  padding: 0 4px;
+  border-radius: 3px;
+  line-height: 1.2;
+}
+
 .ssym-card-list,
 .ssym-item-list {
   display: flex;

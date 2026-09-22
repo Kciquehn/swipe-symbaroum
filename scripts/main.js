@@ -180,6 +180,15 @@ Hooks.once('ready', () => {
     });
   }
 
+  // Listen for combat updates to re-render Combat carousel in real-time
+  for (const hook of ['updateCombat', 'deleteCombat', 'createCombatant', 'updateCombatant', 'deleteCombatant']) {
+    Hooks.on(hook, () => {
+      if (SymbaroumMobileDrawer.instance?.isOpen && SymbaroumMobileDrawer.instance?.currentTabIndex === 1) {
+        SymbaroumMobileDrawer.instance.renderCurrentSection();
+      }
+    });
+  }
+
   // Ensure any dialog, popup, or application window (except desktop actor sheets) opens above the mobile drawer (z-index 10020)
   Hooks.on('renderApplication', (app, html) => {
     // Skip actor sheets
