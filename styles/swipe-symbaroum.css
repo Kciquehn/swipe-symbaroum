@@ -995,13 +995,45 @@
    14. Edit Dialog (Toughness & Corruption)
    ========================================================================== */
 
+/* Elevate all dialogs and popup windows above the mobile drawer (z-index: 9999) */
+body.swipe-symbaroum-active .window-app,
+body.swipe-symbaroum-active .dialog,
+body.swipe-symbaroum-active dialog.window-app,
+.window-app:has(.ssym-dialog),
+.window-app:has(.swipe-hp-dialog),
+.window-app:has(.swipe-corruption-dialog) {
+  z-index: 10010 !important;
+}
+
 /* Foundry VTT window styling when swipe dialog is rendered */
 .window-app:has(.ssym-dialog) {
+  z-index: 10020 !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: min(360px, 94vw) !important;
+  max-width: 94vw !important;
+  margin: 0 !important;
   background: var(--ssym-bg-secondary) !important;
   border: 1px solid var(--ssym-border) !important;
   border-radius: var(--ssym-radius-lg) !important;
   color: var(--ssym-text-main) !important;
   box-shadow: var(--ssym-shadow-lg) !important;
+}
+
+/* Center all dialogs on mobile when swipe-symbaroum is active */
+@media (max-width: 768px) {
+  body.swipe-symbaroum-active .window-app.dialog,
+  body.swipe-symbaroum-active dialog.window-app {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: 94vw !important;
+    width: min(400px, 94vw) !important;
+    margin: 0 !important;
+  }
 }
 
 .window-app:has(.ssym-dialog) .window-header {

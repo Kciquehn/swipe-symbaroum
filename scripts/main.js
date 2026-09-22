@@ -148,4 +148,23 @@ Hooks.once('ready', () => {
       }
     });
   }
+
+  // Ensure any dialog, popup, or application window opens above the mobile drawer (z-index 10020)
+  Hooks.on('renderApplication', (app, html) => {
+    if (document.body.classList.contains('swipe-symbaroum-active') || SymbaroumMobileDrawer.instance?.isOpen) {
+      const el = app.element?.[0] || app.element || (html?.[0] ? html[0].closest('.window-app') : null);
+      if (el && el.style) {
+        el.style.zIndex = '10020';
+      }
+    }
+  });
+
+  Hooks.on('renderDialog', (dialog, html) => {
+    if (document.body.classList.contains('swipe-symbaroum-active') || SymbaroumMobileDrawer.instance?.isOpen) {
+      const el = dialog.element?.[0] || dialog.element || (html?.[0] ? html[0].closest('.window-app') : null);
+      if (el && el.style) {
+        el.style.zIndex = '10020';
+      }
+    }
+  });
 });

@@ -319,6 +319,10 @@ export class SymbaroumMobileDrawer {
       },
       default: 'apply',
       render: (html) => {
+        const win = html[0]?.closest('.window-app') || html[0]?.closest('dialog') || html[0]?.parentElement;
+        if (win) {
+          win.style.zIndex = '10020';
+        }
         html.find('.ssym-delta-btn').on('click', (e) => {
           const delta = Number(e.currentTarget.dataset.delta);
           const input = html.find('#ssym-tough-val');
@@ -391,6 +395,10 @@ export class SymbaroumMobileDrawer {
       },
       default: 'apply',
       render: (html) => {
+        const win = html[0]?.closest('.window-app') || html[0]?.closest('dialog') || html[0]?.parentElement;
+        if (win) {
+          win.style.zIndex = '10020';
+        }
         html.find('.ssym-delta-btn').on('click', (e) => {
           const delta = Number(e.currentTarget.dataset.delta);
           const target = e.currentTarget.dataset.target;
