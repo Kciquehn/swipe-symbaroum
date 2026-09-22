@@ -58,5 +58,7 @@
   "SWIPE_SYM.Sheathed": "Guardada",
   "SWIPE_SYM.Draw": "Sacar",
   "SWIPE_SYM.Sheathe": "Guardar",
-  "SWIPE_SYM.ManageWeapons": "Sacar / Guardar"
+  "SWIPE_SYM.ManageWeapons": "Sacar / Guardar",
+  "SWIPE_SYM.CorruptionThreshold": "Limiar de Corrupção",
+  "SWIPE_SYM.Shadow": "Sombra"
 }

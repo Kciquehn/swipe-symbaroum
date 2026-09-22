@@ -6,14 +6,14 @@
 const i18n = (key) => game.i18n.localize(key);
 
 const ATTRIBUTES = [
-  { key: 'accurate', abbr: 'ATTRIBUTE.ACCURATEABBR', label: 'ATTRIBUTE.ACCURATE' },
   { key: 'cunning', abbr: 'ATTRIBUTE.CUNNINGABBR', label: 'ATTRIBUTE.CUNNING' },
   { key: 'discreet', abbr: 'ATTRIBUTE.DISCREETABBR', label: 'ATTRIBUTE.DISCREET' },
   { key: 'persuasive', abbr: 'ATTRIBUTE.PERSUASIVEABBR', label: 'ATTRIBUTE.PERSUASIVE' },
+  { key: 'accurate', abbr: 'ATTRIBUTE.ACCURATEABBR', label: 'ATTRIBUTE.ACCURATE' },
   { key: 'quick', abbr: 'ATTRIBUTE.QUICKABBR', label: 'ATTRIBUTE.QUICK' },
   { key: 'resolute', abbr: 'ATTRIBUTE.RESOLUTEABBR', label: 'ATTRIBUTE.RESOLUTE' },
-  { key: 'strong', abbr: 'ATTRIBUTE.STRONGABBR', label: 'ATTRIBUTE.STRONG' },
-  { key: 'vigilant', abbr: 'ATTRIBUTE.VIGILANTABBR', label: 'ATTRIBUTE.VIGILANT' }
+  { key: 'vigilant', abbr: 'ATTRIBUTE.VIGILANTABBR', label: 'ATTRIBUTE.VIGILANT' },
+  { key: 'strong', abbr: 'ATTRIBUTE.STRONGABBR', label: 'ATTRIBUTE.STRONG' }
 ];
 
 export class DetailsSection {

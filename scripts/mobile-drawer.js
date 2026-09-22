@@ -164,6 +164,7 @@ export class SymbaroumMobileDrawer {
           <div class="ssym-badges">
             ${sys.bio?.race ? `<span class="ssym-badge">${sys.bio.race}</span>` : ''}
             ${sys.bio?.occupation ? `<span class="ssym-badge">${sys.bio.occupation}</span>` : ''}
+            ${sys.bio?.shadow ? `<span class="ssym-badge ssym-badge-shadow" title="${i18n('SWIPE_SYM.Shadow')}"><i class="fas fa-moon"></i> ${sys.bio.shadow}</span>` : ''}
           </div>
         </div>
       </div>
@@ -171,7 +172,8 @@ export class SymbaroumMobileDrawer {
       <div class="ssym-bars">
         <div class="ssym-bar-group" data-action="edit-toughness">
           <div class="ssym-bar-label">
-            <span>${i18n('SWIPE_SYM.Toughness')}</span>
+            <span class="ssym-bar-title"><i class="fas fa-heart"></i> ${i18n('SWIPE_SYM.Toughness')}</span>
+            <span class="ssym-bar-threshold-badge" title="${i18n('SWIPE_SYM.PainThreshold')}">◆ Limiar: <strong>${tThreshold}</strong></span>
             <span class="ssym-bar-value">${tVal} / ${tMax}</span>
           </div>
           <div class="ssym-bar-track">
@@ -182,7 +184,8 @@ export class SymbaroumMobileDrawer {
 
         <div class="ssym-bar-group" data-action="edit-corruption">
           <div class="ssym-bar-label">
-            <span>${i18n('SWIPE_SYM.Corruption')}</span>
+            <span class="ssym-bar-title"><i class="fas fa-skull"></i> ${i18n('SWIPE_SYM.Corruption')}</span>
+            <span class="ssym-bar-threshold-badge" title="${i18n('SWIPE_SYM.CorruptionThreshold')}">◆ Limiar: <strong>${cThreshold}</strong></span>
             <span class="ssym-bar-value">${cVal} / ${cMax}</span>
           </div>
           <div class="ssym-bar-track">

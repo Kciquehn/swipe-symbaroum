@@ -77,9 +77,31 @@ export class PowersSection {
     `;
   }
 
+  _renderRanks(item) {
+    const isNovice = Boolean(item.system?.novice?.isActive);
+    const isAdept = Boolean(item.system?.adept?.isActive);
+    const isMaster = Boolean(item.system?.master?.isActive);
+
+    return `
+      <div class="ssym-ranks-container" title="Noviço (N) / Adepto (A) / Mestre (M)">
+        <span class="ssym-rank-diamond ${isNovice ? 'active' : ''}">
+          <span class="ssym-diamond-symbol">${isNovice ? '◆' : '◇'}</span>
+          <span class="ssym-rank-char">N</span>
+        </span>
+        <span class="ssym-rank-diamond ${isAdept ? 'active' : ''}">
+          <span class="ssym-diamond-symbol">${isAdept ? '◆' : '◇'}</span>
+          <span class="ssym-rank-char">A</span>
+        </span>
+        <span class="ssym-rank-diamond ${isMaster ? 'active' : ''}">
+          <span class="ssym-diamond-symbol">${isMaster ? '◆' : '◇'}</span>
+          <span class="ssym-rank-char">M</span>
+        </span>
+      </div>
+    `;
+  }
+
   _renderPower(power) {
     const rank = this._getActiveRank(power);
-    const rankLabel = i18n(`SWIPE_SYM.${rank.charAt(0).toUpperCase() + rank.slice(1)}`);
     const activeLevel = power.system[rank];
     const action = activeLevel?.action || '';
     const corruption = power.system.corruption || '';
@@ -91,7 +113,7 @@ export class PowersSection {
           <div class="ssym-item-content">
             <div class="ssym-item-title-row">
               <span class="ssym-item-name">${power.name}</span>
-              <span class="ssym-rank-badge ssym-rank-${rank}">${rankLabel}</span>
+              ${this._renderRanks(power)}
             </div>
             <div class="ssym-item-tags">
               ${action ? `<span class="ssym-tag ssym-tag-action">${action}</span>` : ''}
@@ -111,7 +133,6 @@ export class PowersSection {
 
   _renderAbility(ability) {
     const rank = this._getActiveRank(ability);
-    const rankLabel = i18n(`SWIPE_SYM.${rank.charAt(0).toUpperCase() + rank.slice(1)}`);
     const activeLevel = ability.system[rank];
     const action = activeLevel?.action || '';
 
@@ -122,7 +143,7 @@ export class PowersSection {
           <div class="ssym-item-content">
             <div class="ssym-item-title-row">
               <span class="ssym-item-name">${ability.name}</span>
-              <span class="ssym-rank-badge ssym-rank-${rank}">${rankLabel}</span>
+              ${this._renderRanks(ability)}
             </div>
             ${action ? `
               <div class="ssym-item-tags">

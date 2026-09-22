@@ -58,5 +58,7 @@
   "SWIPE_SYM.Sheathed": "Sheathed",
   "SWIPE_SYM.Draw": "Draw",
   "SWIPE_SYM.Sheathe": "Sheathe",
-  "SWIPE_SYM.ManageWeapons": "Draw / Sheathe"
+  "SWIPE_SYM.ManageWeapons": "Draw / Sheathe",
+  "SWIPE_SYM.CorruptionThreshold": "Corruption Threshold",
+  "SWIPE_SYM.Shadow": "Shadow"
 }

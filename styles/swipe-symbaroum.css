@@ -1,61 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&display=swap');
+
 /**
  * Swipe Symbaroum - Mobile Character Sheet Styles
- * Modern, minimalist, mobile-first touch UI for Symbaroum RPG on Foundry VTT.
+ * Dark Fantasy Davokar theme inspired by the official Symbaroum character sheet.
  */
 
 :root {
-  /* Color Palette */
-  --ssym-bg: #1a1a2e;
-  --ssym-bg-secondary: #222240;
-  --ssym-bg-card: #252547;
-  --ssym-bg-card-hover: #2f2f58;
-  --ssym-bg-elevated: #2d2d52;
-  --ssym-bg-input: #151526;
-  
+  /* Color Palette - Davokar Dark Fantasy */
+  --ssym-bg: #131417;
+  --ssym-bg-secondary: #191b20;
+  --ssym-bg-card: #1d1f25;
+  --ssym-bg-card-hover: #262932;
+  --ssym-bg-elevated: #242730;
+  --ssym-bg-input: #0e0f12;
+
+  /* Symbaroum Gold / Bronze Accents */
+  --ssym-gold: #c5a059;
+  --ssym-gold-bright: #e6c88b;
+  --ssym-gold-dim: #7a6336;
+  --ssym-gold-border: rgba(197, 160, 89, 0.35);
+  --ssym-gold-border-bright: rgba(197, 160, 89, 0.7);
+
   /* Borders & Dividers */
-  --ssym-border: #2a2a4e;
-  --ssym-border-light: rgba(255, 255, 255, 0.08);
-  --ssym-border-highlight: rgba(124, 77, 255, 0.4);
+  --ssym-border: #2c2f38;
+  --ssym-border-light: rgba(197, 160, 89, 0.15);
+  --ssym-border-highlight: rgba(197, 160, 89, 0.5);
 
   /* Typography */
+  --ssym-font-serif: 'Cinzel', Georgia, 'Times New Roman', serif;
   --ssym-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --ssym-text-main: #f0f0f5;
-  --ssym-text-muted: #8e8ea6;
-  --ssym-text-dim: #636380;
+  --ssym-text-main: #ece6dc;
+  --ssym-text-muted: #9e9a91;
+  --ssym-text-dim: #6d6961;
 
   /* Theme Accents */
-  --ssym-accent: #7c4dff;
-  --ssym-accent-hover: #9670ff;
+  --ssym-accent: #c5a059;
+  --ssym-accent-hover: #e6c88b;
 
   /* Health & Corruption */
   --ssym-toughness-high: #4caf50;
-  --ssym-toughness-mid: #ff9800;
-  --ssym-toughness-low: #f44336;
+  --ssym-toughness-mid: #d48b28;
+  --ssym-toughness-low: #c62828;
   --ssym-corruption: #9c27b0;
   --ssym-corruption-dark: #6a1b9a;
 
   /* Action Buttons */
-  --ssym-attack: #e53935;
-  --ssym-attack-hover: #ef5350;
-  --ssym-damage: #fb8c00;
-  --ssym-damage-hover: #ffa726;
-  --ssym-protect: #1e88e5;
-  --ssym-protect-hover: #42a5f5;
-  --ssym-use: #7c4dff;
-  --ssym-use-hover: #9670ff;
+  --ssym-attack: #7c1a1a;
+  --ssym-attack-hover: #9c2222;
+  --ssym-damage: #8a4812;
+  --ssym-damage-hover: #a85817;
+  --ssym-protect: #1e3a5f;
+  --ssym-protect-hover: #294d7d;
+  --ssym-use: #5b1b74;
+  --ssym-use-hover: #752395;
 
   /* Rank Badges */
   --ssym-rank-novice: #43a047;
   --ssym-rank-adept: #1e88e5;
-  --ssym-rank-master: #fbc02d;
+  --ssym-rank-master: #c5a059;
 
   /* Sizing & Radius */
-  --ssym-radius-sm: 6px;
-  --ssym-radius-md: 10px;
-  --ssym-radius-lg: 16px;
-  --ssym-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.25);
-  --ssym-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
-  --ssym-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.55);
+  --ssym-radius-sm: 5px;
+  --ssym-radius-md: 8px;
+  --ssym-radius-lg: 14px;
+  --ssym-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.35);
+  --ssym-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --ssym-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.7);
 }
 
 /* ==========================================================================
@@ -87,7 +97,7 @@
   z-index: 9999;
   background: var(--ssym-bg);
   border-radius: var(--ssym-radius-lg) var(--ssym-radius-lg) 0 0;
-  border-top: 1px solid var(--ssym-border-light);
+  border-top: 2px solid var(--ssym-gold);
   transform: translateY(100%);
   transition: transform 0.3s ease;
   max-height: 92vh;
@@ -95,7 +105,7 @@
   flex-direction: column;
   color: var(--ssym-text-main);
   font-family: var(--ssym-font-family);
-  box-shadow: var(--ssym-shadow-lg);
+  box-shadow: 0 -6px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(197, 160, 89, 0.15);
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -130,16 +140,16 @@
 }
 
 .ssym-handle-bar {
-  width: 40px;
+  width: 42px;
   height: 4px;
-  background: #555577;
+  background: var(--ssym-gold-dim);
   border-radius: 2px;
   margin: 0 auto;
   transition: background-color 0.2s ease;
 }
 
 .ssym-handle:hover .ssym-handle-bar {
-  background: #777799;
+  background: var(--ssym-gold);
 }
 
 /* ==========================================================================
@@ -168,11 +178,12 @@
 }
 
 .ssym-avatar {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--ssym-border);
+  border: 2px solid var(--ssym-gold);
+  box-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
   background-color: var(--ssym-bg-secondary);
   display: block;
 }
@@ -188,14 +199,15 @@
 
 .ssym-name,
 .ssym-char-name {
-  font-size: 16px;
+  font-family: var(--ssym-font-serif);
+  font-size: 17px;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--ssym-gold-bright);
+  letter-spacing: 0.6px;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  letter-spacing: -0.2px;
 }
 
 .ssym-name-row {
@@ -214,14 +226,22 @@
 }
 
 .ssym-badge {
-  font-size: 10px;
-  font-weight: 600;
+  font-family: var(--ssym-font-serif);
+  font-size: 9.5px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 2px 6px;
+  letter-spacing: 0.8px;
+  padding: 2px 7px;
   border-radius: 4px;
-  background: var(--ssym-bg-elevated);
-  color: var(--ssym-text-muted);
+  background: rgba(197, 160, 89, 0.1);
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  color: var(--ssym-gold-bright);
+}
+
+.ssym-badge-shadow {
+  background: rgba(156, 39, 176, 0.18);
+  border-color: rgba(156, 39, 176, 0.45);
+  color: #d1a4e0;
 }
 
 /* Resource Bar Groups (Tap Targets) */
@@ -260,7 +280,7 @@
 .ssym-bar-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   font-size: 11px;
   line-height: 1.2;
   color: var(--ssym-text-muted);
@@ -268,16 +288,36 @@
 
 .ssym-bar-label span:first-child,
 .ssym-bar-title {
-  font-weight: 600;
+  font-family: var(--ssym-font-serif);
+  font-weight: 700;
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 10.5px;
+  letter-spacing: 0.8px;
+  color: var(--ssym-gold-bright);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ssym-bar-threshold-badge {
+  font-family: var(--ssym-font-serif);
+  font-size: 9.5px;
   letter-spacing: 0.5px;
+  color: var(--ssym-gold-bright);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.ssym-bar-threshold-badge strong {
+  color: #ffffff;
 }
 
 .ssym-bar-value,
 .ssym-bar-values {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 700;
   color: #ffffff;
 }
@@ -400,8 +440,11 @@
   min-height: 48px;
   padding: 10px 8px;
   text-align: center;
-  font-size: 12px;
-  color: #888888;
+  font-family: var(--ssym-font-serif);
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--ssym-text-muted);
   border: none;
   border-bottom: 2px solid transparent;
   transition: all 0.2s ease;
@@ -416,13 +459,14 @@
 }
 
 .ssym-tab:hover {
-  color: #c5c5d6;
+  color: var(--ssym-gold-bright);
 }
 
 .ssym-tab.active {
-  color: #ffffff;
-  border-bottom-color: var(--ssym-accent);
-  font-weight: 600;
+  color: var(--ssym-gold-bright);
+  border-bottom-color: var(--ssym-gold);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(197, 160, 89, 0.4);
 }
 
 .ssym-tab i,
@@ -478,7 +522,7 @@
 
 .ssym-stat-capsule {
   background: var(--ssym-bg-card);
-  border: 1px solid var(--ssym-border-light);
+  border: 1px solid rgba(197, 160, 89, 0.25);
   border-radius: var(--ssym-radius-md);
   padding: 8px 6px;
   text-align: center;
@@ -487,8 +531,8 @@
   justify-content: center;
   align-items: center;
   min-height: 52px;
-  box-shadow: var(--ssym-shadow-sm);
-  transition: transform 0.12s ease, background-color 0.15s ease;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.12s ease, background-color 0.15s ease, border-color 0.15s ease;
   user-select: none;
 }
 
@@ -500,19 +544,22 @@
 .ssym-stat-capsule.clickable:active {
   transform: scale(0.96);
   background: var(--ssym-bg-card-hover);
+  border-color: var(--ssym-gold);
 }
 
 .ssym-stat-label {
+  font-family: var(--ssym-font-serif);
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--ssym-text-muted);
+  letter-spacing: 1px;
+  color: var(--ssym-gold-bright);
   margin-bottom: 2px;
 }
 
 .ssym-stat-value {
-  font-size: 18px;
+  font-family: var(--ssym-font-serif);
+  font-size: 20px;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.1;
@@ -539,7 +586,7 @@
 .ssym-attribute-card {
   position: relative;
   background: var(--ssym-bg-card);
-  border: 1px solid var(--ssym-border-light);
+  border: 1px solid rgba(197, 160, 89, 0.28);
   border-radius: var(--ssym-radius-md);
   padding: 8px 4px;
   text-align: center;
@@ -549,16 +596,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 58px;
-  transition: transform 0.1s ease, background-color 0.15s ease, border-color 0.15s ease;
+  min-height: 60px;
+  transition: transform 0.1s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
   user-select: none;
-  box-shadow: var(--ssym-shadow-sm);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.35);
 }
 
 .ssym-attr-card:hover,
 .ssym-attribute-card:hover {
   background: var(--ssym-bg-card-hover);
-  border-color: var(--ssym-border-highlight);
+  border-color: var(--ssym-gold);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.35), 0 0 8px rgba(197, 160, 89, 0.25);
 }
 
 .ssym-attr-card:active,
@@ -566,25 +614,28 @@
 .ssym-attr-card.ssym-pressed,
 .ssym-attribute-card.ssym-pressed {
   transform: scale(0.94);
-  background: #323260;
-  border-color: var(--ssym-accent);
+  background: #25231e;
+  border-color: var(--ssym-gold-bright);
+  box-shadow: 0 0 14px rgba(197, 160, 89, 0.5);
 }
 
 .ssym-attr-abbr {
-  font-size: 10px;
-  font-weight: 700;
+  font-family: var(--ssym-font-serif);
+  font-size: 11px;
+  font-weight: 800;
   text-transform: uppercase;
-  color: var(--ssym-text-muted);
-  letter-spacing: 0.5px;
+  color: var(--ssym-gold);
+  letter-spacing: 1.2px;
   margin-bottom: 2px;
 }
 
 .ssym-attr-name {
-  font-size: 9px;
-  font-weight: 600;
+  font-family: var(--ssym-font-serif);
+  font-size: 8.5px;
+  font-weight: 700;
   text-transform: uppercase;
-  color: var(--ssym-text-dim);
-  letter-spacing: 0.4px;
+  color: var(--ssym-text-muted);
+  letter-spacing: 0.6px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -592,9 +643,10 @@
 }
 
 .ssym-attr-value {
-  font-size: 20px;
+  font-family: var(--ssym-font-serif);
+  font-size: 22px;
   font-weight: 700;
-  color: #ffffff;
+  color: #f7f4ee;
   line-height: 1.1;
   margin-bottom: 2px;
 }
@@ -645,13 +697,16 @@
 }
 
 .ssym-btn-pill {
-  background: rgba(124, 77, 255, 0.15);
-  border: 1px solid rgba(124, 77, 255, 0.4);
-  color: #c4b5fd;
+  background: rgba(197, 160, 89, 0.12);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  color: var(--ssym-gold-bright);
+  font-family: var(--ssym-font-serif);
   border-radius: 20px;
   padding: 4px 10px;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -662,7 +717,7 @@
 
 .ssym-btn-pill:active {
   transform: scale(0.95);
-  background: rgba(124, 77, 255, 0.3);
+  background: rgba(197, 160, 89, 0.28);
 }
 
 .ssym-card-list,
@@ -762,13 +817,14 @@
 }
 
 .ssym-item-name {
+  font-family: var(--ssym-font-serif);
   font-size: 13.5px;
   font-weight: 700;
-  color: #ffffff;
+  color: #f7f4ee;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.4px;
 }
 
 /* Badge Buttons (e.g. Sacada / Guardada) */
@@ -895,8 +951,11 @@
   min-height: 38px;
   border-radius: var(--ssym-radius-sm);
   border: 1px solid transparent;
-  font-size: 12px;
+  font-family: var(--ssym-font-serif);
+  font-size: 11px;
   font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
   color: #ffffff;
   display: inline-flex;
   align-items: center;
@@ -914,43 +973,91 @@
 }
 
 .ssym-btn-attack {
-  background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
-  box-shadow: 0 2px 8px rgba(229, 57, 53, 0.3);
+  background: linear-gradient(135deg, #7c1a1a 0%, #4a0d0d 100%);
+  border: 1px solid rgba(220, 70, 70, 0.4);
+  box-shadow: 0 2px 8px rgba(124, 26, 26, 0.4);
 }
 
 .ssym-btn-damage {
-  background: linear-gradient(135deg, #fb8c00 0%, #e65100 100%);
-  box-shadow: 0 2px 8px rgba(251, 140, 0, 0.3);
+  background: linear-gradient(135deg, #8a4812 0%, #542b08 100%);
+  border: 1px solid rgba(230, 140, 40, 0.4);
+  box-shadow: 0 2px 8px rgba(138, 72, 18, 0.4);
 }
 
 .ssym-btn-draw-toggle {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.16);
-  color: #e0e0e0;
+  background: rgba(197, 160, 89, 0.1);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  color: var(--ssym-gold-bright);
 }
 
 .ssym-btn-draw-toggle.is-drawn {
-  background: rgba(76, 175, 80, 0.15);
-  border-color: rgba(76, 175, 80, 0.4);
+  background: rgba(76, 175, 80, 0.18);
+  border-color: rgba(76, 175, 80, 0.5);
   color: #a5d6a7;
 }
 
 .ssym-btn-protect {
-  background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
-  box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3);
+  background: linear-gradient(135deg, #1e3a5f 0%, #122238 100%);
+  border: 1px solid rgba(70, 130, 210, 0.4);
+  box-shadow: 0 2px 8px rgba(30, 58, 95, 0.4);
 }
 
 .ssym-btn-cast {
-  background: linear-gradient(135deg, #8e24aa 0%, #6a1b9a 100%);
-  box-shadow: 0 2px 8px rgba(142, 36, 170, 0.3);
+  background: linear-gradient(135deg, #5b1b74 0%, #350f44 100%);
+  border: 1px solid rgba(170, 70, 220, 0.4);
+  box-shadow: 0 2px 8px rgba(91, 27, 116, 0.4);
 }
 
-/* Rank Badges */
+/* Official Symbaroum 3-Rank Diamonds (Noviço, Adepto, Mestre) */
+.ssym-ranks-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(197, 160, 89, 0.22);
+}
+
+.ssym-rank-diamond {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--ssym-font-serif);
+  font-size: 10px;
+  font-weight: 600;
+  color: #63615b;
+  transition: all 0.15s ease;
+}
+
+.ssym-diamond-symbol {
+  font-size: 11.5px;
+  line-height: 1;
+}
+
+.ssym-rank-char {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.ssym-rank-diamond.active {
+  color: var(--ssym-gold-bright);
+  font-weight: 800;
+  text-shadow: 0 0 6px rgba(229, 195, 120, 0.5);
+}
+
+.ssym-rank-diamond.active .ssym-diamond-symbol {
+  color: var(--ssym-gold);
+}
+
+/* Rank Badges (Fallback) */
 .ssym-rank-badge {
+  font-family: var(--ssym-font-serif);
   font-size: 9.5px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   padding: 2px 6px;
   border-radius: 4px;
   color: #ffffff;
@@ -1003,14 +1110,18 @@
    ========================================================================== */
 
 .ssym-section-title {
+  font-family: var(--ssym-font-serif);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--ssym-text-muted);
-  padding-bottom: 6px;
+  letter-spacing: 1.5px;
+  color: var(--ssym-gold-bright);
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.15) 0%, rgba(197, 160, 89, 0.04) 65%, transparent 100%);
+  border-left: 3px solid var(--ssym-gold);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.22);
+  padding: 6px 10px;
   margin: 14px 0 8px 0;
-  border-bottom: 1px solid var(--ssym-border);
+  border-radius: 0 4px 4px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1048,15 +1159,17 @@
   margin-bottom: 12px;
 }
 
-.ssym-money-card {
+.ssym-money-card,
+.ssym-money-item {
   background: var(--ssym-bg-card);
-  border: 1px solid var(--ssym-border-light);
+  border: 1px solid rgba(197, 160, 89, 0.22);
   border-radius: var(--ssym-radius-md);
   padding: 8px 10px;
   display: flex;
   align-items: center;
   gap: 8px;
   min-height: 48px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 .ssym-money-icon {
@@ -1096,11 +1209,12 @@
 }
 
 .ssym-money-label {
+  font-family: var(--ssym-font-serif);
   font-size: 10px;
   text-transform: uppercase;
-  color: var(--ssym-text-muted);
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  color: var(--ssym-gold-bright);
+  font-weight: 700;
+  letter-spacing: 0.8px;
 }
 
 .ssym-money-value {
@@ -1123,7 +1237,7 @@
 .ssym-xp-card,
 .ssym-xp-item {
   background: var(--ssym-bg-card);
-  border: 1px solid var(--ssym-border-light);
+  border: 1px solid rgba(197, 160, 89, 0.22);
   border-radius: var(--ssym-radius-md);
   padding: 8px 6px;
   text-align: center;
@@ -1132,14 +1246,16 @@
   align-items: center;
   min-height: 48px;
   justify-content: center;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 .ssym-xp-label {
+  font-family: var(--ssym-font-serif);
   font-size: 10px;
   text-transform: uppercase;
-  color: var(--ssym-text-muted);
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  color: var(--ssym-gold-bright);
+  font-weight: 700;
+  letter-spacing: 0.8px;
   margin-bottom: 2px;
 }
 
