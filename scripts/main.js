@@ -200,4 +200,20 @@ Hooks.once('ready', () => {
       }
     }
   });
+
+  // Ensure Dice So Nice! 3D dice canvas renders above the mobile sheet (z-index 10030)
+  const elevateDiceCanvas = () => {
+    const dsnCanvas = document.getElementById('dice-box-canvas');
+    if (dsnCanvas) {
+      dsnCanvas.style.zIndex = '10030';
+      dsnCanvas.style.pointerEvents = 'none';
+    }
+    if (game.dice3d?.canvas?.[0]) {
+      game.dice3d.canvas.css('z-index', 10030);
+    }
+  };
+
+  elevateDiceCanvas();
+  Hooks.on('diceSoNiceReady', elevateDiceCanvas);
+  Hooks.on('diceSoNiceRollStart', elevateDiceCanvas);
 });

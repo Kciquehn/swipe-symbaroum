@@ -1595,3 +1595,15 @@ body.swipe-symbaroum-hide-hud .symbaroum-hud {
   }
 }
 
+/* ==========================================================================
+   18. Dice So Nice! 3D Dice Layer (render on top of mobile sheet)
+   ========================================================================== */
+
+#dice-box-canvas,
+#dice-box-canvas canvas,
+.dice-box-canvas,
+div[id^="dice-box-canvas"] {
+  z-index: 10030 !important;
+  pointer-events: none !important;
+}
+
