@@ -104,15 +104,46 @@ Hooks.once('ready', () => {
     }
   }
 
-  // Intercept actor sheet rendering
+  // Connect with Swipe VTT module if present so its buttons call our drawer directly
+  if (globalThis.SwipeVTT) {
+    globalThis.SwipeVTT.MobileSheetDrawer = SymbaroumMobileDrawer.instance;
+  }
+
+  // Intercept all registered ActorSheet classes for player actors
+  // This completely stops the desktop sheet from ever rendering or appearing on screen
+  const sheetClasses = [
+    foundry.appv1?.sheets?.ActorSheet,
+    ActorSheet,
+    ...(Object.values(CONFIG.Actor?.sheetClasses?.player || {}).map(s => s.cls))
+  ].filter(Boolean);
+
+  const patched = new Set();
+  for (const cls of sheetClasses) {
+    if (cls?.prototype && !patched.has(cls)) {
+      patched.add(cls);
+      const orig = cls.prototype.render;
+      cls.prototype.render = function (force = false, options = {}) {
+        const actor = this.actor;
+        if (actor && actor.type === 'player' && (isMobileDevice() || forceEnable)) {
+          SymbaroumMobileDrawer.instance.open(actor);
+          return this; // Do not render the desktop window!
+        }
+        return orig.call(this, force, options);
+      };
+    }
+  }
+
+  // Intercept actor sheet rendering fallback
   Hooks.on('renderActorSheet', (sheet, html, data) => {
     const actor = sheet.actor;
     if (!actor || actor.type !== 'player') return;
 
-    // If Swipe VTT is handling this, don't interfere
-    if (isSwipeVTTActive() && sheet.constructor.isSwipeMobileSheet) return;
-
-    // Close the default sheet and open our drawer
+    // Immediately hide, remove, and close the desktop sheet
+    const el = sheet.element?.[0] || sheet.element || html?.[0]?.closest('.window-app');
+    if (el) {
+      el.style.display = 'none';
+      el.remove?.();
+    }
     sheet.close({ animate: false });
     SymbaroumMobileDrawer.instance.open(actor);
   });
@@ -149,8 +180,10 @@ Hooks.once('ready', () => {
     });
   }
 
-  // Ensure any dialog, popup, or application window opens above the mobile drawer (z-index 10020)
+  // Ensure any dialog, popup, or application window (except desktop actor sheets) opens above the mobile drawer (z-index 10020)
   Hooks.on('renderApplication', (app, html) => {
+    // Skip actor sheets
+    if (app instanceof (foundry.appv1?.sheets?.ActorSheet || ActorSheet)) return;
     if (document.body.classList.contains('swipe-symbaroum-active') || SymbaroumMobileDrawer.instance?.isOpen) {
       const el = app.element?.[0] || app.element || (html?.[0] ? html[0].closest('.window-app') : null);
       if (el && el.style) {

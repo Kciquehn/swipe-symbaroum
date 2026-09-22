@@ -995,14 +995,28 @@
    14. Edit Dialog (Toughness & Corruption)
    ========================================================================== */
 
-/* Elevate all dialogs and popup windows above the mobile drawer (z-index: 9999) */
-body.swipe-symbaroum-active .window-app,
+/* Elevate all dialogs and popup windows (except desktop actor sheets) above the mobile drawer (z-index: 9999) */
+body.swipe-symbaroum-active .window-app:not(.sheet.actor),
 body.swipe-symbaroum-active .dialog,
-body.swipe-symbaroum-active dialog.window-app,
+body.swipe-symbaroum-active dialog.window-app:not(.sheet.actor),
 .window-app:has(.ssym-dialog),
 .window-app:has(.swipe-hp-dialog),
 .window-app:has(.swipe-corruption-dialog) {
   z-index: 10010 !important;
+}
+
+/* Suppress native desktop actor sheets completely on mobile */
+body.swipe-symbaroum-active .window-app.sheet.actor,
+body.swipe-symbaroum-active .app.sheet.actor,
+body.swipe-symbaroum-active .sheet.actor {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  z-index: -1 !important;
 }
 
 /* Foundry VTT window styling when swipe dialog is rendered */
