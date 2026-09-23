@@ -1308,6 +1308,30 @@
   color: var(--ssym-gold-bright);
 }
 
+.ssym-btn-use-item {
+  background: linear-gradient(135deg, #1b5e20 0%, #0d3311 100%);
+  border: 1px solid rgba(76, 175, 80, 0.45);
+  box-shadow: 0 2px 8px rgba(27, 94, 32, 0.4);
+}
+
+.ssym-item-card.is-usable-item {
+  border-left-color: #4caf50;
+}
+
+.ssym-item-icon.ssym-icon-usable {
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ssym-item-icon.ssym-icon-usable:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}
+
+.ssym-item-icon.ssym-icon-usable:active {
+  transform: scale(0.95);
+}
+
 /* Official Symbaroum 3-Rank Diamonds (Noviço, Adepto, Mestre) */
 .ssym-ranks-container {
   display: inline-flex;
